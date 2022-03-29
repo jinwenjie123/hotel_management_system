@@ -223,6 +223,19 @@ public class DatabaseConnectionHandler {
 	}
 
 	public boolean checkMembership(int customerID) {
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM MEMBERSHIP_APPLIES WHERE CID = " + "'" + customerID + "'";
+
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next()) {
+				return true;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 }

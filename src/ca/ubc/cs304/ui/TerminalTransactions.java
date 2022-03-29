@@ -69,6 +69,7 @@ public class TerminalTransactions {
 			System.out.println("4. Show hotels of a specific company");
 			System.out.println("5. Show workers under a specific department");
 			System.out.println("6. Check whether a worker is part time or full time");
+			System.out.println("7. Check whether a customer is a membership");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -110,6 +111,15 @@ public class TerminalTransactions {
 						try {
 							int workerID = Integer.parseInt(bufferedReader.readLine());
 							System.out.println(delegate.checkWorkerType(workerID));
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+				case 7:
+						System.out.println("Please enter the customer's ID:");
+						try {
+							int customerID = Integer.parseInt(bufferedReader.readLine());
+							System.out.println(delegate.checkMembership(customerID));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
