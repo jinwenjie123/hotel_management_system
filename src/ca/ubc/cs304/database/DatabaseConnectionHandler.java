@@ -112,8 +112,8 @@ public class DatabaseConnectionHandler {
 		ArrayList<HotelBelongs> result = new ArrayList<HotelBelongs>();
 		try {
 			Statement stmt = connection.createStatement();
-			String query = "SELECT * FROM \"hotel_belongs\", \"company\" WHERE \"hotel_belongs\".\"companyName\" = \"company\".\"name\" and \"companyName\" = " + "\'" + companyName + "\'";
-//			String query = "SELECT * FROM \"hotel_belongs\"";
+			String query = "SELECT * FROM HOTEL_BELONGS, COMPANY WHERE HOTEL_BELONGS.COMPANYNAME = COMPANY.NAME and COMPANYNAME = " + "\'" + companyName + "\'";
+//			String query = "SELECT * FROM HOTEL_BELONGS";
 
 			ResultSet rs = stmt.executeQuery(query);
 
