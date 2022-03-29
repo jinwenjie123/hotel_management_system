@@ -10,11 +10,12 @@ import ca.ubc.cs304.model.WorkerWorks;
 import ca.ubc.cs304.ui.LoginWindow;
 import ca.ubc.cs304.ui.TerminalTransactions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate {
 
-    private DatabaseConnectionHandler dbHandler = null;
+    private DatabaseConnectionHandler dbHandler;
     private LoginWindow loginWindow = null;
 
     public Hotel() {
@@ -50,7 +51,7 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
 
     @Override
     public void databaseSetup() {
-        dbHandler.databaseSetup();;
+        dbHandler.databaseSetup();
     }
 
 
@@ -75,18 +76,25 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     }
 
     @Override
-    public void listWorker(int departmentID, int hotelID) {
-
+    public List<WorkerWorks> listWorker(int departmentID, int hotelID) {
+        ArrayList<WorkerWorks> workers = dbHandler.listWorker(departmentID, hotelID);
+        for (WorkerWorks worker : workers) {
+            System.out.println(worker.getName());
+            System.out.println(worker.getBirthDate());
+            System.out.println(worker.getSex());
+            System.out.println(worker.getContractStartTime());
+        }
+        return workers;
     }
 
     @Override
-    public void checkWorkerType(int workerID) {
-
+    public String checkWorkerType(int workerID) {
+        return dbHandler.checkWorkerType(workerID);
     }
 
     @Override
     public boolean checkMembership(int customerID) {
-        return false;
+        return dbHandler.checkMembership(customerID);
     }
 
     @Override
@@ -143,7 +151,7 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     /**
      * Main method called at launch time
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Hotel hotel = new Hotel();
         hotel.start();
     }

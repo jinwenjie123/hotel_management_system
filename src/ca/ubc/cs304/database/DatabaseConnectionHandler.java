@@ -3,6 +3,7 @@ package ca.ubc.cs304.database;
 import ca.ubc.cs304.controller.Hotel;
 import ca.ubc.cs304.model.Company;
 import ca.ubc.cs304.model.HotelBelongs;
+import ca.ubc.cs304.model.WorkerWorks;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -95,7 +96,7 @@ public class DatabaseConnectionHandler {
 			ResultSet rs = stmt.executeQuery("select table_name from user_tables");
 			
 			while(rs.next()) {
-				if(rs.getString(1).toLowerCase().equals("branch")) {
+				if(rs.getString(1).equalsIgnoreCase("branch")) {
 					stmt.execute("DROP TABLE branch");
 					break;
 				}
@@ -112,7 +113,7 @@ public class DatabaseConnectionHandler {
 		ArrayList<HotelBelongs> result = new ArrayList<HotelBelongs>();
 		try {
 			Statement stmt = connection.createStatement();
-			String query = "SELECT * FROM HOTEL_BELONGS, COMPANY WHERE HOTEL_BELONGS.COMPANYNAME = COMPANY.NAME and COMPANYNAME = " + "\'" + companyName + "\'";
+			String query = "SELECT * FROM HOTEL_BELONGS, COMPANY WHERE HOTEL_BELONGS.COMPANYNAME = COMPANY.NAME and COMPANYNAME = " + "'" + companyName + "'";
 //			String query = "SELECT * FROM HOTEL_BELONGS";
 
 			ResultSet rs = stmt.executeQuery(query);
@@ -162,5 +163,66 @@ public class DatabaseConnectionHandler {
 //			e.printStackTrace();
 //		}
 		return result;
+	}
+
+	public ArrayList<WorkerWorks> listWorker(int departmentID, int hotelID) {
+		ArrayList<WorkerWorks> result = new ArrayList<>();
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM WORKER_WORKS WHERE DID = " + "'" + departmentID + "'";
+//			String query = "SELECT * FROM HOTEL_BELONGS";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				WorkerWorks model = new WorkerWorks(rs.getInt("wid"),
+						rs.getInt("did"),
+						rs.getString("name"),
+						rs.getDate("birthdate"),
+						rs.getString("sex"),
+						rs.getString("department"),
+						rs.getDate("contractstarttime"));
+				result.add(model);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public String checkWorkerType(int workerID) {
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM FULLTIMEWORKER WHERE WID = " + "'" + workerID + "'";
+//			String query = "SELECT * FROM HOTEL_BELONGS";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			if(rs.next()) {
+				return "Full Time worker";
+			}
+			rs.close();
+
+			query = "SELECT * FROM PARTTIMEWORKER WHERE WID = " + "'" + workerID + "'";
+//			String query = "SELECT * FROM HOTEL_BELONGS";
+
+			rs = stmt.executeQuery(query);
+
+			if(rs.next()) {
+				return "Part Time worker";
+			}
+			rs.close();
+
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "Something wrong happens. Please try later.";
+	}
+
+	public boolean checkMembership(int customerID) {
+		return false;
 	}
 }

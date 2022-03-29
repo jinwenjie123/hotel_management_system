@@ -17,26 +17,26 @@ import java.util.List;
  * Bank is the actual class that will implement the methods.
  */
 public interface TerminalTransactionsDelegate {
-	public void databaseSetup();
+	void databaseSetup();
 
-	public void checkRoom(int hotelID);
-	public boolean updateRoom(int hotelID, int roomNumber, int price, String state, String kind);
-	public boolean addWorker(WorkerWorks workerWorks);
-	public boolean deleteWorker(int workerID);
-	public void listWorker(int departmentID, int hotelID);
-	public void checkWorkerType(int workerID);
+	void checkRoom(int hotelID);
+	boolean updateRoom(int hotelID, int roomNumber, int price, String state, String kind);
+	boolean addWorker(WorkerWorks workerWorks);
+	boolean deleteWorker(int workerID);
+	List<WorkerWorks> listWorker(int departmentID, int hotelID);
+	String checkWorkerType(int workerID);
 
-	public boolean checkMembership(int customerID);
-	public boolean assignMembership(int customerID, Customer customer);
+	boolean checkMembership(int customerID);
+	boolean assignMembership(int customerID, Customer customer);
 
-	public BillPays checkBill(int customerID);
-	public boolean addCustomer(int customerID, Customer customer);
-	public Customer checkCustomer(int hotelID);
+	BillPays checkBill(int customerID);
+	boolean addCustomer(int customerID, Customer customer);
+	Customer checkCustomer(int hotelID);
 
-	public boolean addHotel(int hotelID, HotelBelongs hotel);
-	public HotelBelongs checkHotel(int hotelID);
-	public List<HotelBelongs> checkCompany(String companyName);
+	boolean addHotel(int hotelID, HotelBelongs hotel);
+	HotelBelongs checkHotel(int hotelID);
+	List<HotelBelongs> checkCompany(String companyName);
 
 	
-	public void terminalTransactionsFinished();
+	void terminalTransactionsFinished();
 }

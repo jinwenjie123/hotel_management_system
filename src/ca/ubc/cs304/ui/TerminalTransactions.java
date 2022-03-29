@@ -67,7 +67,8 @@ public class TerminalTransactions {
 			System.out.println("2. Delete branch");
 			System.out.println("3. Update branch name");
 			System.out.println("4. Show hotels of a specific company");
-			System.out.println("5. Quit");
+			System.out.println("5. Show workers under a specific department");
+			System.out.println("6. Check whether a worker is part time or full time");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -95,8 +96,24 @@ public class TerminalTransactions {
 					}
 					break;
 				case 5:
-					handleQuitOption();
+					System.out.println("Please enter the departmentID and hotelID");
+					try {
+						int departmentID = Integer.parseInt(bufferedReader.readLine());
+						int hotelID = Integer.parseInt(bufferedReader.readLine());
+						delegate.listWorker(departmentID, hotelID);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					break;
+				case 6:
+						System.out.println("Please enter the worker's ID");
+						try {
+							int workerID = Integer.parseInt(bufferedReader.readLine());
+							System.out.println(delegate.checkWorkerType(workerID));
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
 				default:
 					System.out.println(WARNING_TAG + " The number that you entered was not a valid option.");
 					break;
