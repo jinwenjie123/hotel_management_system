@@ -211,13 +211,13 @@ create table  worker_works
     contractStartTime  DATE          not null
 );
 
-INSERT INTO  worker_works  VALUES ('1', '500', 'John Smith', TO_DATE('1983-06-18 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Maintenance', TO_DATE('2007-08-21 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  worker_works  VALUES ('2', '501', 'Jason Lim', TO_DATE('2002-11-12 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Customer Service', TO_DATE('2016-11-18 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  worker_works  VALUES ('3', '502', 'Jennie Kim', TO_DATE('1996-01-16 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Female', 'Cleaning', TO_DATE('2019-06-05 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  worker_works  VALUES ('4', '503', 'Michael Ting', TO_DATE('1989-09-02 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Foods', TO_DATE('2020-01-04 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  worker_works  VALUES ('5', '504', 'Lilian Yang', TO_DATE('1994-06-06 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Female', 'Security', TO_DATE('2020-02-20 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  worker_works  VALUES ('6', '504', 'Jack Li', TO_DATE('1994-06-06 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Security', TO_DATE('2020-07-13 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  worker_works  VALUES ('7', '503', 'Robin Chen', TO_DATE('1978-08-04 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Foods', TO_DATE('2020-10-19 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  worker_works  VALUES ('8', '502', 'Sharon Potts', TO_DATE('1995-09-27 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Cleaninng', TO_DATE('2019-02-09 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  worker_works  VALUES ('9', '502', 'Allan Huang', TO_DATE('2001-01-11 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Cleaning', TO_DATE('2020-01-23 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  worker_works  VALUES ('10', '501', 'Robert Evans', TO_DATE('1969-12-03 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'CustomerService', TO_DATE('2022-02-27 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('1', '500', 'John Smith', TO_DATE('1983-06-18 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Maintenance', TO_DATE('2007-08-21 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('2', '501', 'Jason Lim', TO_DATE('2002-11-12 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Customer Service', TO_DATE('2016-11-18 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('3', '502', 'Jennie Kim', TO_DATE('1996-01-16 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Female', 'Cleaning', TO_DATE('2019-06-05 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('4', '503', 'Michael Ting', TO_DATE('1989-09-02 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Foods', TO_DATE('2020-01-04 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('5', '504', 'Lilian Yang', TO_DATE('1994-06-06 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Female', 'Security', TO_DATE('2020-02-20 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('6', '504', 'Jack Li', TO_DATE('1994-06-06 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Security', TO_DATE('2020-07-13 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('7', '503', 'Robin Chen', TO_DATE('1978-08-04 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Foods', TO_DATE('2020-10-19 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('8', '502', 'Sharon Potts', TO_DATE('1995-09-27 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Cleaninng', TO_DATE('2019-02-09 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('9', '502', 'Allan Huang', TO_DATE('2001-01-11 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'Cleaning', TO_DATE('2020-01-23 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
+INSERT INTO worker_works VALUES ('10', '501', 'Robert Evans', TO_DATE('1969-12-03 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'), 'Male', 'CustomerService', TO_DATE('2022-02-27 00:00:00', 'SYYYY-MM-DD HH24:MI:SS'));
