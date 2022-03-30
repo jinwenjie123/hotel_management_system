@@ -120,8 +120,10 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     }
 
     @Override
-    public boolean addCustomer(int customerID, Customer customer) {
-        return false;
+    public boolean addCustomer(String drivingLicense, String name) {
+
+        return dbHandler.addCustomer(drivingLicense, name);
+
     }
 
     @Override
@@ -144,6 +146,7 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     public boolean addWorker(int workerId, int dId, String name, String birthday, String sex, String department, String contract_start_time){
         return dbHandler.addWorker(workerId, dId, name, birthday, sex,department, contract_start_time);
     }
+
 
     @Override
     public HotelBelongs checkHotel(int hotelID) {

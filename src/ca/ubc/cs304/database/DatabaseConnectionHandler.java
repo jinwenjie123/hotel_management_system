@@ -13,6 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -274,15 +276,23 @@ public class DatabaseConnectionHandler {
 		return false;
 	}
 
-	public boolean addWorker(int workerId, int dId, String name, String birthday, String sex, String department, String contract_start_time){
+	public boolean addWorker(int workerId, int dId, String name, String birthdayString, String sex, String department, String contract_start_time_string){
 		try {
 			Statement stmt = connection.createStatement();
-			String query = "INSERT INTO WORKER_WORKS VALUES" + " (" + "'" + workerId + "'" + "," + "'" + dId + "'" + "," +
-					"'" + name + "'" + "," + "'" + birthday + "'" + "," + "'" + sex + "'" + "," + "'" + department + "'" + "," + "'" + contract_start_time + "'" + ")";
-			int rowCount = stmt.executeUpdate(query);
-			if (rowCount >= 1) {
-				return true;
-			}
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO WORKER_WORKS VALUES (?, ?, ?, ?, ?, ?, ?)");
+			ps.setInt(1, workerId);
+			ps.setInt(2, dId);
+			ps.setString(3, name);
+			ps.setDate(4, java.sql.Date.valueOf(birthdayString));
+			ps.setString(5, sex);
+			ps.setString(6, department);
+			ps.setDate(7, java.sql.Date.valueOf(contract_start_time_string));
+			ps.executeUpdate();
+
+			connection.commit();
+			ps.close();
+			return true;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -356,5 +366,22 @@ public class DatabaseConnectionHandler {
 			e.printStackTrace();
 		}
 		return customers;
+	}
+
+	public boolean addCustomer(String drivingLicense, String name) {
+		boolean result = false;
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO CUSTOMER VALUES (?, ?)");
+			ps.setString(1, drivingLicense);
+			ps.setString(2, name);
+
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }
