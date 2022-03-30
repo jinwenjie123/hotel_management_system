@@ -78,6 +78,7 @@ public class TerminalTransactions {
 			System.out.println("9. Add a new room");
 			System.out.println("10. Check a customers' bills");
 			System.out.println("11. Check all customers of a specific company");
+			System.out.println("12. Quit");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -193,6 +194,9 @@ public class TerminalTransactions {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+					break;
+				case 12:
+					delegate.terminalTransactionsFinished();
 					break;
 				default:
 					System.out.println(WARNING_TAG + " The number that you entered was not a valid option.");
