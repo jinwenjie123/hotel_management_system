@@ -97,7 +97,7 @@ public class DatabaseConnectionHandler {
 			
 			while(rs.next()) {
 				if(rs.getString(1).equalsIgnoreCase("branch")) {
-					stmt.execute("DROP TABLE branch");
+					//stmt.execute("DROP TABLE branch");
 					break;
 				}
 			}
@@ -139,29 +139,24 @@ public class DatabaseConnectionHandler {
 
 	public List<Company> showAllCompany() {
 		ArrayList<Company> result = new ArrayList<Company>();
-//		try {
-//			Statement stmt = connection.createStatement();
-////			String query = "SELECT * FROM hotel_belongs, company WHERE hotel_belongs.companyName = company.name and companyName = " + "\'" + companyName + "\'";
-//			String query = "SELECT * FROM \"company\"";
-//
-//			ResultSet rs = stmt.executeQuery(query);
-//
-//			while (rs.next()) {
-//				HotelBelongs model = new HotelBelongs(rs.getInt("id"),
-//						rs.getString("hotelName"),
-//						rs.getString("companyName"),
-//						rs.getDouble("revenue"),
-//						rs.getString("address"),
-//						rs.getDate("builtTime"),
-//						rs.getFloat("rating")
-//				);
-//				result.add(model);
-//			}
-//			rs.close();
-//			stmt.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM COMPANY";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				Company model = new Company(rs.getString("name"),
+						rs.getDouble("marketPrice"),
+						rs.getDate("builtTime"),
+						rs.getString("address"));
+				result.add(model);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -170,7 +165,6 @@ public class DatabaseConnectionHandler {
 		try {
 			Statement stmt = connection.createStatement();
 			String query = "SELECT * FROM WORKER_WORKS WHERE DID = " + "'" + departmentID + "'";
-//			String query = "SELECT * FROM HOTEL_BELONGS";
 
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -196,7 +190,6 @@ public class DatabaseConnectionHandler {
 		try {
 			Statement stmt = connection.createStatement();
 			String query = "SELECT * FROM FULLTIMEWORKER WHERE WID = " + "'" + workerID + "'";
-//			String query = "SELECT * FROM HOTEL_BELONGS";
 
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -206,7 +199,7 @@ public class DatabaseConnectionHandler {
 			rs.close();
 
 			query = "SELECT * FROM PARTTIMEWORKER WHERE WID = " + "'" + workerID + "'";
-//			String query = "SELECT * FROM HOTEL_BELONGS";
+
 
 			rs = stmt.executeQuery(query);
 
