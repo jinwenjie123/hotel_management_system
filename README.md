@@ -25,7 +25,7 @@ Current progress:
 
 - [x] /login
 - [x] /checkRoom
-- [ ] /addRoom
+- [x] /addRoom
 - [ ] /updateRoom
 - [ ] /addWorker
 - [ ] /deleteWorker
