@@ -21,3 +21,19 @@ Interface:
 | /checkHotel        | hID                                 | Hotel's entity                                 |                                                      |                                                              |
 | /checkCompany      | cName                               | Return a list of hotels belong to that company |                                                      |                                                              |
 
+Current progress:
+
+- [x] /login
+- [ ] /checkRoom
+- [ ] /updateRoom
+- [ ] /addWorker
+- [ ] /deleteWorker
+- [x] /listWorkers
+- [x] /checkWorkerType
+- [x] /checkMembership
+- [ ] /assignMembership
+- [ ] /checkBill
+- [ ] /addCustomer
+- [ ] /addHotel
+- [ ] /checkHotel
+- [x] /checkCompany
