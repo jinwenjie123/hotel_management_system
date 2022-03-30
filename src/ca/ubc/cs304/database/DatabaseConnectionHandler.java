@@ -1,6 +1,7 @@
 package ca.ubc.cs304.database;
 
 import ca.ubc.cs304.controller.Hotel;
+import ca.ubc.cs304.model.BillPays;
 import ca.ubc.cs304.model.Company;
 import ca.ubc.cs304.model.HotelBelongs;
 import ca.ubc.cs304.model.WorkerWorks;
@@ -110,11 +111,10 @@ public class DatabaseConnectionHandler {
 	}
 
 	public List<HotelBelongs> checkCompany(String companyName) {
-		ArrayList<HotelBelongs> result = new ArrayList<HotelBelongs>();
+		ArrayList<HotelBelongs> result = new ArrayList<>();
 		try {
 			Statement stmt = connection.createStatement();
 			String query = "SELECT * FROM HOTEL_BELONGS, COMPANY WHERE HOTEL_BELONGS.COMPANYNAME = COMPANY.NAME and COMPANYNAME = " + "'" + companyName + "'";
-//			String query = "SELECT * FROM HOTEL_BELONGS";
 
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -138,7 +138,7 @@ public class DatabaseConnectionHandler {
 	}
 
 	public List<Company> showAllCompany() {
-		ArrayList<Company> result = new ArrayList<Company>();
+		ArrayList<Company> result = new ArrayList<>();
 		try {
 			Statement stmt = connection.createStatement();
 			String query = "SELECT * FROM COMPANY";
@@ -230,5 +230,32 @@ public class DatabaseConnectionHandler {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+
+	public List<BillPays> checkBill(int customerID) {
+		ArrayList<BillPays> bills = new ArrayList<>();
+		BillPays bill;
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM BILL_PAYS WHERE CID = " + "'" + customerID + "'";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			if (rs.next()) {
+				bill = new BillPays(rs.getInt("bID"),
+						rs.getInt("cID"),
+						rs.getDouble("price"),
+						rs.getString("state"),
+						rs.getDate("paymentDate"),
+						rs.getString("paymentMethod"));
+				bills.add(bill);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bills;
 	}
 }

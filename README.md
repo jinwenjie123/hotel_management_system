@@ -32,7 +32,7 @@ Current progress:
 - [x] /checkWorkerType
 - [x] /checkMembership
 - [ ] /assignMembership
-- [ ] /checkBill
+- [x] /checkBill
 - [ ] /addCustomer
 - [ ] /addHotel
 - [ ] /checkHotel

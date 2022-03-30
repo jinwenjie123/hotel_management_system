@@ -103,8 +103,8 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     }
 
     @Override
-    public BillPays checkBill(int customerID) {
-        return null;
+    public List<BillPays> checkBill(int customerID) {
+        return dbHandler.checkBill(customerID);
     }
 
     @Override

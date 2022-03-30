@@ -3,8 +3,11 @@ package ca.ubc.cs304.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
+import ca.ubc.cs304.model.BillPays;
+import ca.ubc.cs304.model.HotelBelongs;
 
 /**
  * The class is only responsible for handling terminal text inputs. 
@@ -70,6 +73,7 @@ public class TerminalTransactions {
 			System.out.println("5. Show workers under a specific department");
 			System.out.println("6. Check whether a worker is part time or full time");
 			System.out.println("7. Check whether a customer is a membership");
+			System.out.println("8. Check a customers' bills");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -91,7 +95,7 @@ public class TerminalTransactions {
 					System.out.println("Please enter the company's name:");
 					try {
 						String companyName = bufferedReader.readLine();
-						delegate.checkCompany(companyName);
+						List<HotelBelongs> hotels = delegate.checkCompany(companyName);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -124,6 +128,26 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
+				case 8:
+					System.out.println("Please enter the customer's ID:");
+					try {
+						int customerID = Integer.parseInt(bufferedReader.readLine());
+						List<BillPays> bills = delegate.checkBill(customerID);
+						if(!bills.isEmpty()) {
+							for(BillPays bill : bills) {
+								System.out.println(bill.getbID());
+								System.out.println(bill.getcID());
+								System.out.println(bill.getPrice());
+								System.out.println(bill.getPaymentDate());
+								System.out.println(bill.getPaymentMethod());
+							}
+						} else {
+							System.out.println("The customer doesn't have any bills!");
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					break;
 				default:
 					System.out.println(WARNING_TAG + " The number that you entered was not a valid option.");
 					break;
