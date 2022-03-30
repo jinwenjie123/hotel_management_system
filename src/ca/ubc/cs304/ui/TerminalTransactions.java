@@ -83,8 +83,7 @@ public class TerminalTransactions {
 			System.out.println("10. Check a customers' bills");
 			System.out.println("11. Check all customers of a specific company");
 			System.out.println("12. Add a new worker");
-			System.out.println("13. Delete a worker's information");
-			System.out.println("14. Quit");
+			System.out.println("13. Quit");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -224,19 +223,7 @@ public class TerminalTransactions {
 					}
 					break;
 
-					case 13:
-						try {
-							System.out.println("Please enter the worker's wID");
-							int workerID = Integer.parseInt(bufferedReader.readLine());
-							if(delegate.deleteWorker(workerID)){
-								System.out.println("Delete the worker's information successfully!");
-							}
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						break;
-
-				case 14:
+				case 13:
 					delegate.terminalTransactionsFinished();
 					break;
 				default:
