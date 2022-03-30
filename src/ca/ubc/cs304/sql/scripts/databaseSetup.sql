@@ -186,11 +186,12 @@ INSERT INTO fullTimeWorker VALUES ('9', '1000');
 
 create table room_contains
 (
-    roomNumber NUMBER        not null primary key,
+    roomNumber NUMBER        not null,
     price      NUMBER(20, 2) not null,
     kind       VARCHAR2(255) not null,
     state      VARCHAR2(255) not null,
-    hotel_id   NUMBER        not null primary key references hotel_belongs(id)  on delete cascade
+    hotel_id   NUMBER        not null references hotel_belongs(id)  on delete cascade,
+    CONSTRAINTS room_contains_PK primary key(roomNumber, hotel_id)
 );
 
 INSERT INTO room_contains VALUES ('1', '177', 'Standard', 'Occupied', '12345');
