@@ -65,7 +65,7 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
 
     @Override
     public boolean deleteWorker(int workerID) {
-        return false;
+        return dbHandler.deleteWorker(workerID);
     }
 
     @Override

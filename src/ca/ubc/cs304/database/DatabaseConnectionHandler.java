@@ -194,10 +194,6 @@ public class DatabaseConnectionHandler {
 
 			ResultSet rs = stmt.executeQuery(query);
 
-			if(rs.next() == false){
-				return result;
-			}
-
 			while (rs.next()) {
 				WorkerWorks model = new WorkerWorks(rs.getInt("wid"),
 						rs.getInt("did"),
@@ -292,6 +288,22 @@ public class DatabaseConnectionHandler {
 		}
 		return false;
 	}
+
+	public boolean deleteWorker(int workerID){
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "DELETE FROM WORKER_WORKS WHERE WID = " + "'" + workerID + "'";
+			int rowCount = stmt.executeUpdate(query);
+			if (rowCount >= 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+
 
 	public List<BillPays> checkBill(int customerID) {
 		ArrayList<BillPays> bills = new ArrayList<>();
