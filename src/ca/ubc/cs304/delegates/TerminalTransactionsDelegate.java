@@ -24,6 +24,9 @@ public interface TerminalTransactionsDelegate {
 	boolean addWorker(WorkerWorks workerWorks);
 	boolean deleteWorker(int workerID);
 	List<WorkerWorks> listWorker(int departmentID, int hotelID);
+	void listRoom(int hotelID);
+
+
 	String checkWorkerType(int workerID);
 
 	boolean checkMembership(int customerID);
@@ -34,6 +37,7 @@ public interface TerminalTransactionsDelegate {
 	Customer checkCustomer(int hotelID);
 
 	boolean addHotel(int hotelID, HotelBelongs hotel);
+	boolean addRoom(int roomNumber, int price, String kind, String state, int hotelId);
 	HotelBelongs checkHotel(int hotelID);
 	List<HotelBelongs> checkCompany(String companyName);
 

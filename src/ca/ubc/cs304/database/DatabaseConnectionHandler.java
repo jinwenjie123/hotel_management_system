@@ -3,6 +3,7 @@ package ca.ubc.cs304.database;
 import ca.ubc.cs304.controller.Hotel;
 import ca.ubc.cs304.model.Company;
 import ca.ubc.cs304.model.HotelBelongs;
+import ca.ubc.cs304.model.Room;
 import ca.ubc.cs304.model.WorkerWorks;
 
 import java.sql.Connection;
@@ -165,6 +166,30 @@ public class DatabaseConnectionHandler {
 		return result;
 	}
 
+	public ArrayList<Room> listRoom(int hotelId){
+		ArrayList<Room> result = new ArrayList<>();
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM ROOM_CONTAINS WHERE HOTEL_ID = " + "'" + hotelId + "'";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				Room model = new Room(rs.getInt("ROOMNUMBER"),
+						rs.getInt("PRICE"),
+						rs.getString("KIND"),
+						rs.getString("STATE"),
+						rs.getInt("HOTEL_ID"));
+				result.add(model);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public ArrayList<WorkerWorks> listWorker(int departmentID, int hotelID) {
 		ArrayList<WorkerWorks> result = new ArrayList<>();
 		try {
@@ -173,6 +198,10 @@ public class DatabaseConnectionHandler {
 //			String query = "SELECT * FROM HOTEL_BELONGS";
 
 			ResultSet rs = stmt.executeQuery(query);
+
+			if(rs.next() == false){
+				return result;
+			}
 
 			while (rs.next()) {
 				WorkerWorks model = new WorkerWorks(rs.getInt("wid"),
@@ -232,6 +261,23 @@ public class DatabaseConnectionHandler {
 				return true;
 			}
 			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean addRoom(int roomNumber, int price, String kind, String state, int hotelId){
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "INSERT INTO ROOM_CONTAINS VALUES" + " (" + "'" + roomNumber + "'" + "," + "'" + price + "'" + "," +
+					"'" + kind + "'" + "," + "'" + state + "'" + "," + "'" + hotelId + "'" + ")";
+
+			int rowCount  = stmt.executeUpdate(query);
+			if(rowCount >= 1){
+				return true;
+			}
 			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

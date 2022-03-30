@@ -3,10 +3,7 @@ package ca.ubc.cs304.controller;
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.delegates.LoginWindowDelegate;
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
-import ca.ubc.cs304.model.BillPays;
-import ca.ubc.cs304.model.Customer;
-import ca.ubc.cs304.model.HotelBelongs;
-import ca.ubc.cs304.model.WorkerWorks;
+import ca.ubc.cs304.model.*;
 import ca.ubc.cs304.ui.LoginWindow;
 import ca.ubc.cs304.ui.TerminalTransactions;
 
@@ -66,11 +63,6 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     }
 
     @Override
-    public boolean addWorker(WorkerWorks workerWorks) {
-        return false;
-    }
-
-    @Override
     public boolean deleteWorker(int workerID) {
         return false;
     }
@@ -78,6 +70,10 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     @Override
     public List<WorkerWorks> listWorker(int departmentID, int hotelID) {
         ArrayList<WorkerWorks> workers = dbHandler.listWorker(departmentID, hotelID);
+        if (workers.isEmpty()) {
+            System.out.printf("Error! Wrong Department ID!");
+            return workers;
+        }
         for (WorkerWorks worker : workers) {
             System.out.println(worker.getName());
             System.out.println(worker.getBirthDate());
@@ -86,6 +82,21 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
         }
         return workers;
     }
+
+    @Override
+    public void listRoom(int hotelID){
+        ArrayList<Room> rooms = dbHandler.listRoom(hotelID);
+
+        if (rooms.isEmpty()) {
+            System.out.printf("Error! Wrong roomnumber!");
+        }
+        for (Room room : rooms) {
+            System.out.println(room.getRoom_number() + " "+ room.getPrice() + " " + room.getKind() + " " + room.getState() + " " + room.getHotel_id());
+        }
+    }
+
+
+
 
     @Override
     public String checkWorkerType(int workerID) {
@@ -119,6 +130,16 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
 
     @Override
     public boolean addHotel(int hotelID, HotelBelongs hotel) {
+        return false;
+    }
+
+    @Override
+    public boolean addRoom(int roomNumber, int price, String kind, String state, int hotelId) {
+        return dbHandler.addRoom(roomNumber, price, kind, state, hotelId);
+    }
+
+    @Override
+    public boolean addWorker(WorkerWorks workerWorks) {
         return false;
     }
 

@@ -70,6 +70,8 @@ public class TerminalTransactions {
 			System.out.println("5. Show workers under a specific department");
 			System.out.println("6. Check whether a worker is part time or full time");
 			System.out.println("7. Check whether a customer is a membership");
+			System.out.println("8. Check Room information");
+			System.out.println("9. Add a new room");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -124,6 +126,34 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
+				case 8:
+						System.out.println("Please enter the hotel ID");
+						try {
+							int hotelID = Integer.parseInt(bufferedReader.readLine());
+							delegate.listRoom(hotelID);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+
+					case 9:
+						System.out.println("Please enter the RoomNumber, Price, Kind, State, and Hotel_ID in order");
+						try {
+							int roomNumber = Integer.parseInt(bufferedReader.readLine());
+							int price = Integer.parseInt(bufferedReader.readLine());
+							String kind = bufferedReader.readLine();
+							String state = bufferedReader.readLine();
+							int hotelId = Integer.parseInt(bufferedReader.readLine());
+							if(delegate.addRoom(roomNumber, price, kind, state, hotelId)){
+								System.out.println("Add new room successfully!");
+							}
+
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+
+
 				default:
 					System.out.println(WARNING_TAG + " The number that you entered was not a valid option.");
 					break;
