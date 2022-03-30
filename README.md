@@ -24,7 +24,8 @@ Interface:
 Current progress:
 
 - [x] /login
-- [ ] /checkRoom
+- [x] /checkRoom
+- [ ] /addRoom
 - [ ] /updateRoom
 - [ ] /addWorker
 - [ ] /deleteWorker
