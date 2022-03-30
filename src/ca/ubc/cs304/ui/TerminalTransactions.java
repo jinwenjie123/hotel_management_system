@@ -83,7 +83,9 @@ public class TerminalTransactions {
 			System.out.println("10. Check a customers' bills");
 			System.out.println("11. Check all customers of a specific company");
 			System.out.println("12. Add a new worker");
-			System.out.println("13. Quit");
+			System.out.println("13. Delete a worker");
+			System.out.println("14. Add a customer");
+			System.out.println("15. Quit");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -208,12 +210,9 @@ public class TerminalTransactions {
 						int dId = Integer.parseInt(bufferedReader.readLine());
 						String name = bufferedReader.readLine();
 						String birthDayString = bufferedReader.readLine();
-						//DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-						//Date birthday = format.parse(birthDayString);
 						String sex = bufferedReader.readLine();
 						String department = bufferedReader.readLine();
 						String contract_start_time_string = bufferedReader.readLine();
-						//Date contract_start_time = format.parse(contract_start_time_string);
 						if(delegate.addWorker(workerId, dId, name, birthDayString, sex,department, contract_start_time_string)){
 							System.out.println("Add new worker successfully!");
 						}
@@ -222,8 +221,34 @@ public class TerminalTransactions {
 						e.printStackTrace();
 					}
 					break;
-
 				case 13:
+					try {
+						System.out.println("Please enter the worker's wID");
+						int workerID = Integer.parseInt(bufferedReader.readLine());
+						if(delegate.deleteWorker(workerID)){
+							System.out.println("Delete the worker's information successfully!");
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					break;
+				case 14:
+					try {
+						System.out.println("Please enter the customer's driving license number:");
+						String drivingLicense = bufferedReader.readLine();
+						System.out.println("Please enter the customer's name:");
+						String customerName = bufferedReader.readLine();
+						boolean insertCustomer = delegate.addCustomer(drivingLicense, customerName);
+						if(insertCustomer) {
+							System.out.println("Add customer successfully!");
+						} else {
+							System.out.println("Add Failed! The customer already exists!");
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					break;
+				case 15:
 					delegate.terminalTransactionsFinished();
 					break;
 				default:
