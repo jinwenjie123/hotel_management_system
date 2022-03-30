@@ -13,7 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -193,10 +196,6 @@ public class DatabaseConnectionHandler {
 
 			ResultSet rs = stmt.executeQuery(query);
 
-			if(rs.next() == false){
-				return result;
-			}
-
 			while (rs.next()) {
 				WorkerWorks model = new WorkerWorks(rs.getInt("wid"),
 						rs.getInt("did"),
@@ -271,6 +270,29 @@ public class DatabaseConnectionHandler {
 			if (rowCount >= 1) {
 				return true;
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean addWorker(int workerId, int dId, String name, String birthdayString, String sex, String department, String contract_start_time_string){
+		try {
+			Statement stmt = connection.createStatement();
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO WORKER_WORKS VALUES (?, ?, ?, ?, ?, ?, ?)");
+			ps.setInt(1, workerId);
+			ps.setInt(2, dId);
+			ps.setString(3, name);
+			ps.setDate(4, java.sql.Date.valueOf(birthdayString));
+			ps.setString(5, sex);
+			ps.setString(6, department);
+			ps.setDate(7, java.sql.Date.valueOf(contract_start_time_string));
+			ps.executeUpdate();
+
+			connection.commit();
+			ps.close();
+			return true;
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -8,6 +8,7 @@ import ca.ubc.cs304.ui.LoginWindow;
 import ca.ubc.cs304.ui.TerminalTransactions;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate {
@@ -142,9 +143,10 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     }
 
     @Override
-    public boolean addWorker(WorkerWorks workerWorks) {
-        return false;
+    public boolean addWorker(int workerId, int dId, String name, String birthday, String sex, String department, String contract_start_time){
+        return dbHandler.addWorker(workerId, dId, name, birthday, sex,department, contract_start_time);
     }
+
 
     @Override
     public HotelBelongs checkHotel(int hotelID) {

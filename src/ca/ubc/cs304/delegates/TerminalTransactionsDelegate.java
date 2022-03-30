@@ -5,6 +5,7 @@ import ca.ubc.cs304.model.Customer;
 import ca.ubc.cs304.model.HotelBelongs;
 import ca.ubc.cs304.model.WorkerWorks;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public interface TerminalTransactionsDelegate {
 
 	void checkRoom(int hotelID);
 	boolean updateRoom(int hotelID, int roomNumber, int price, String state, String kind);
-	boolean addWorker(WorkerWorks workerWorks);
+	boolean addWorker(int workerId, int dId, String name, String birthday, String sex, String department, String contract_start_time);
 	boolean deleteWorker(int workerID);
 	List<WorkerWorks> listWorker(int departmentID, int hotelID);
 	void listRoom(int hotelID);
