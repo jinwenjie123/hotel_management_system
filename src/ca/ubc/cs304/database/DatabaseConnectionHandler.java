@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -267,6 +268,21 @@ public class DatabaseConnectionHandler {
 			String query = "INSERT INTO ROOM_CONTAINS VALUES" + " (" + "'" + roomNumber + "'" + "," + "'" + price + "'" + "," +
 					"'" + kind + "'" + "," + "'" + state + "'" + "," + "'" + hotelId + "'" + ")";
 
+			int rowCount = stmt.executeUpdate(query);
+			if (rowCount >= 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean addWorker(int workerId, int dId, String name, String birthday, String sex, String department, String contract_start_time){
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "INSERT INTO WORKER_WORKS VALUES" + " (" + "'" + workerId + "'" + "," + "'" + dId + "'" + "," +
+					"'" + name + "'" + "," + "'" + birthday + "'" + "," + "'" + sex + "'" + "," + "'" + department + "'" + "," + "'" + contract_start_time + "'" + ")";
 			int rowCount = stmt.executeUpdate(query);
 			if (rowCount >= 1) {
 				return true;

@@ -3,6 +3,10 @@ package ca.ubc.cs304.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
@@ -78,7 +82,8 @@ public class TerminalTransactions {
 			System.out.println("9. Add a new room");
 			System.out.println("10. Check a customers' bills");
 			System.out.println("11. Check all customers of a specific company");
-			System.out.println("12. Quit");
+			System.out.println("12. Add a new worker");
+			System.out.println("13. Quit");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -143,7 +148,7 @@ public class TerminalTransactions {
 						}
 						break;
 
-					case 9:
+				case 9:
 						System.out.println("Please enter the RoomNumber, Price, Kind, State, and Hotel_ID in order");
 						try {
 							int roomNumber = Integer.parseInt(bufferedReader.readLine());
@@ -195,7 +200,30 @@ public class TerminalTransactions {
 						e.printStackTrace();
 					}
 					break;
+
 				case 12:
+					try {
+						System.out.println("Please enter a new worker's workerId, departmentId, name, birthdate, gender, department, contract start time");
+						int workerId = Integer.parseInt(bufferedReader.readLine());
+						int dId = Integer.parseInt(bufferedReader.readLine());
+						String name = bufferedReader.readLine();
+						String birthDayString = bufferedReader.readLine();
+						//DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+						//Date birthday = format.parse(birthDayString);
+						String sex = bufferedReader.readLine();
+						String department = bufferedReader.readLine();
+						String contract_start_time_string = bufferedReader.readLine();
+						//Date contract_start_time = format.parse(contract_start_time_string);
+						if(delegate.addWorker(workerId, dId, name, birthDayString, sex,department, contract_start_time_string)){
+							System.out.println("Add new worker successfully!");
+						}
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					break;
+
+				case 13:
 					delegate.terminalTransactionsFinished();
 					break;
 				default:
