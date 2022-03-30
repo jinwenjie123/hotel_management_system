@@ -16,8 +16,25 @@ Interface:
 | /assign Membership | cID, and customer’s information     | boolean                                        | Whether assign the membership successfully.          | User can assign the membership to a customer. ( add the customer into our membership list) |
 | /checkBill         | cID                                 | Bill entity                                    |                                                      | Users can get a list of bills associated with the cID.       |
 | /addCustomer       | cID and customer’s info             | boolean                                        |                                                      | Users can store a customer entity into the database. And update the room’s status. |
-| /checkCustomer     | hID                                 | Customer's entity                              |                                                      | Return all customers’ entity of a specific hotel.            |
+| /checkAllCustomer  | hID                                 | Customer's entity                              |                                                      | Return all customers’ entity of a specific hotel.            |
 | /addHotel          | hID, hotel info                     | boolean                                        |                                                      | CEO can propose to build a new hotel                         |
 | /checkHotel        | hID                                 | Hotel's entity                                 |                                                      |                                                              |
 | /checkCompany      | cName                               | Return a list of hotels belong to that company |                                                      |                                                              |
 
+Current progress:
+
+- [x] /login
+- [ ] /checkRoom
+- [ ] /updateRoom
+- [ ] /addWorker
+- [ ] /deleteWorker
+- [x] /listWorkers
+- [x] /checkWorkerType
+- [x] /checkMembership
+- [ ] /assignMembership
+- [x] /checkBill
+- [x] /checkAllCustomer
+- [ ] /addCustomer
+- [ ] /addHotel
+- [ ] /checkHotel
+- [x] /checkCompany

@@ -5,6 +5,7 @@ import ca.ubc.cs304.model.Company;
 import ca.ubc.cs304.model.HotelBelongs;
 import ca.ubc.cs304.model.Room;
 import ca.ubc.cs304.model.WorkerWorks;
+import ca.ubc.cs304.model.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -98,7 +99,7 @@ public class DatabaseConnectionHandler {
 			
 			while(rs.next()) {
 				if(rs.getString(1).equalsIgnoreCase("branch")) {
-					stmt.execute("DROP TABLE branch");
+					//stmt.execute("DROP TABLE branch");
 					break;
 				}
 			}
@@ -111,11 +112,10 @@ public class DatabaseConnectionHandler {
 	}
 
 	public List<HotelBelongs> checkCompany(String companyName) {
-		ArrayList<HotelBelongs> result = new ArrayList<HotelBelongs>();
+		ArrayList<HotelBelongs> result = new ArrayList<>();
 		try {
 			Statement stmt = connection.createStatement();
 			String query = "SELECT * FROM HOTEL_BELONGS, COMPANY WHERE HOTEL_BELONGS.COMPANYNAME = COMPANY.NAME and COMPANYNAME = " + "'" + companyName + "'";
-//			String query = "SELECT * FROM HOTEL_BELONGS";
 
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -139,30 +139,25 @@ public class DatabaseConnectionHandler {
 	}
 
 	public List<Company> showAllCompany() {
-		ArrayList<Company> result = new ArrayList<Company>();
-//		try {
-//			Statement stmt = connection.createStatement();
-////			String query = "SELECT * FROM hotel_belongs, company WHERE hotel_belongs.companyName = company.name and companyName = " + "\'" + companyName + "\'";
-//			String query = "SELECT * FROM \"company\"";
-//
-//			ResultSet rs = stmt.executeQuery(query);
-//
-//			while (rs.next()) {
-//				HotelBelongs model = new HotelBelongs(rs.getInt("id"),
-//						rs.getString("hotelName"),
-//						rs.getString("companyName"),
-//						rs.getDouble("revenue"),
-//						rs.getString("address"),
-//						rs.getDate("builtTime"),
-//						rs.getFloat("rating")
-//				);
-//				result.add(model);
-//			}
-//			rs.close();
-//			stmt.close();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+		ArrayList<Company> result = new ArrayList<>();
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM COMPANY";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				Company model = new Company(rs.getString("name"),
+						rs.getDouble("marketPrice"),
+						rs.getDate("builtTime"),
+						rs.getString("address"));
+				result.add(model);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -195,7 +190,6 @@ public class DatabaseConnectionHandler {
 		try {
 			Statement stmt = connection.createStatement();
 			String query = "SELECT * FROM WORKER_WORKS WHERE DID = " + "'" + departmentID + "'";
-//			String query = "SELECT * FROM HOTEL_BELONGS";
 
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -225,7 +219,6 @@ public class DatabaseConnectionHandler {
 		try {
 			Statement stmt = connection.createStatement();
 			String query = "SELECT * FROM FULLTIMEWORKER WHERE WID = " + "'" + workerID + "'";
-//			String query = "SELECT * FROM HOTEL_BELONGS";
 
 			ResultSet rs = stmt.executeQuery(query);
 
@@ -235,7 +228,7 @@ public class DatabaseConnectionHandler {
 			rs.close();
 
 			query = "SELECT * FROM PARTTIMEWORKER WHERE WID = " + "'" + workerID + "'";
-//			String query = "SELECT * FROM HOTEL_BELONGS";
+
 
 			rs = stmt.executeQuery(query);
 
@@ -268,20 +261,72 @@ public class DatabaseConnectionHandler {
 		return false;
 	}
 
-	public boolean addRoom(int roomNumber, int price, String kind, String state, int hotelId){
+	public boolean addRoom(int roomNumber, int price, String kind, String state, int hotelId) {
 		try {
 			Statement stmt = connection.createStatement();
 			String query = "INSERT INTO ROOM_CONTAINS VALUES" + " (" + "'" + roomNumber + "'" + "," + "'" + price + "'" + "," +
 					"'" + kind + "'" + "," + "'" + state + "'" + "," + "'" + hotelId + "'" + ")";
 
-			int rowCount  = stmt.executeUpdate(query);
-			if(rowCount >= 1){
+			int rowCount = stmt.executeUpdate(query);
+			if (rowCount >= 1) {
 				return true;
 			}
-			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	public List<BillPays> checkBill(int customerID) {
+		ArrayList<BillPays> bills = new ArrayList<>();
+		BillPays bill;
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM BILL_PAYS WHERE CID = " + "'" + customerID + "'";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			if (rs.next()) {
+				bill = new BillPays(rs.getInt("bID"),
+						rs.getInt("cID"),
+						rs.getDouble("price"),
+						rs.getString("state"),
+						rs.getDate("paymentDate"),
+						rs.getString("paymentMethod"));
+				bills.add(bill);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bills;
+	}
+
+	public List<Customer> checkAllCustomer(int hotelID) {
+		ArrayList<Customer> customers = new ArrayList<>();
+		Customer customer;
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM CUSTOMER_STAY WHERE HOTEL_ID = " + "'" + hotelID + "'";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				customer = new Customer(rs.getInt("cID"),
+						rs.getInt("hotel_id"),
+						rs.getString("address"),
+						rs.getString("phone_number"),
+						rs.getString("driving_license"),
+						rs.getDate("checkin_time"),
+						rs.getDate("checkout_time"));
+				customers.add(customer);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return customers;
 	}
 }

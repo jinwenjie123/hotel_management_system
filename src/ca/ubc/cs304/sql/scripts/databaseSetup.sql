@@ -190,7 +190,7 @@ create table room_contains
     price      NUMBER(20, 2) not null,
     kind       VARCHAR2(255) not null,
     state      VARCHAR2(255) not null,
-    hotel_id   NUMBER        not null references hotel_belongs(id)  on delete cascade
+    hotel_id   NUMBER        not null primary key references hotel_belongs(id)  on delete cascade
 );
 
 INSERT INTO room_contains VALUES ('1', '177', 'Standard', 'Occupied', '12345');

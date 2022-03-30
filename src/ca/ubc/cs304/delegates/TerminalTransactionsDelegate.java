@@ -32,9 +32,9 @@ public interface TerminalTransactionsDelegate {
 	boolean checkMembership(int customerID);
 	boolean assignMembership(int customerID, Customer customer);
 
-	BillPays checkBill(int customerID);
+	List<BillPays> checkBill(int customerID);
 	boolean addCustomer(int customerID, Customer customer);
-	Customer checkCustomer(int hotelID);
+	List<Customer> checkAllCustomer(int hotelID);
 
 	boolean addHotel(int hotelID, HotelBelongs hotel);
 	boolean addRoom(int roomNumber, int price, String kind, String state, int hotelId);
