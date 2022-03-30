@@ -1,10 +1,7 @@
 package ca.ubc.cs304.database;
 
 import ca.ubc.cs304.controller.Hotel;
-import ca.ubc.cs304.model.BillPays;
-import ca.ubc.cs304.model.Company;
-import ca.ubc.cs304.model.HotelBelongs;
-import ca.ubc.cs304.model.WorkerWorks;
+import ca.ubc.cs304.model.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -232,7 +229,6 @@ public class DatabaseConnectionHandler {
 		return false;
 	}
 
-
 	public List<BillPays> checkBill(int customerID) {
 		ArrayList<BillPays> bills = new ArrayList<>();
 		BillPays bill;
@@ -258,4 +254,33 @@ public class DatabaseConnectionHandler {
 		}
 		return bills;
 	}
+
+	public List<Customer> checkAllCustomer(int hotelID) {
+		ArrayList<Customer> customers = new ArrayList<>();
+		Customer customer;
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT * FROM CUSTOMER_STAY WHERE HOTEL_ID = " + "'" + hotelID + "'";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				customer = new Customer(rs.getInt("cID"),
+						rs.getInt("hotel_id"),
+						rs.getString("address"),
+						rs.getString("phone_number"),
+						rs.getString("driving_license"),
+						rs.getDate("checkin_time"),
+						rs.getDate("checkout_time"));
+				customers.add(customer);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return customers;
+	}
+
+
 }

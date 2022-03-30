@@ -31,7 +31,7 @@ public interface TerminalTransactionsDelegate {
 
 	List<BillPays> checkBill(int customerID);
 	boolean addCustomer(int customerID, Customer customer);
-	Customer checkCustomer(int hotelID);
+	List<Customer> checkAllCustomer(int hotelID);
 
 	boolean addHotel(int hotelID, HotelBelongs hotel);
 	HotelBelongs checkHotel(int hotelID);

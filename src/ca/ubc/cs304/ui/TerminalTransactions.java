@@ -7,6 +7,7 @@ import java.util.List;
 
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
 import ca.ubc.cs304.model.BillPays;
+import ca.ubc.cs304.model.Customer;
 import ca.ubc.cs304.model.HotelBelongs;
 
 /**
@@ -74,6 +75,7 @@ public class TerminalTransactions {
 			System.out.println("6. Check whether a worker is part time or full time");
 			System.out.println("7. Check whether a customer is a membership");
 			System.out.println("8. Check a customers' bills");
+			System.out.println("9. Check all customers of a specific company");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -143,6 +145,22 @@ public class TerminalTransactions {
 							}
 						} else {
 							System.out.println("The customer doesn't have any bills!");
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					break;
+				case 9:
+					try {
+						System.out.println("Please enter the hotel's ID:");
+						int hotelID = Integer.parseInt(bufferedReader.readLine());
+						List<Customer> customers = delegate.checkAllCustomer(hotelID);
+						if(customers != null) {
+							for (Customer customer : customers) {
+								System.out.println();
+							}
+						} else {
+							System.out.println("This hotel currently has no customer! Poor hotel!");
 						}
 					} catch (IOException e) {
 						e.printStackTrace();

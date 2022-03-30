@@ -113,8 +113,9 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     }
 
     @Override
-    public Customer checkCustomer(int hotelID) {
-        return null;
+    public List<Customer> checkAllCustomer(int hotelID) {
+        List<Customer> result = dbHandler.checkAllCustomer(hotelID);
+        return result;
     }
 
     @Override
