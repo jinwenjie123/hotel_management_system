@@ -96,9 +96,6 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
         }
     }
 
-
-
-
     @Override
     public String checkWorkerType(int workerID) {
         return dbHandler.checkWorkerType(workerID);
@@ -110,8 +107,8 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     }
 
     @Override
-    public boolean assignMembership(int customerID, Customer customer) {
-        return false;
+    public boolean assignMembership(int customerID, float discount, long credit) {
+        return dbHandler.assignMembership(customerID, discount, credit);
     }
 
     @Override
@@ -172,6 +169,11 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
         dbHandler = null;
 
         System.exit(0);
+    }
+
+    @Override
+    public List<Company> showAllCompany() {
+        return dbHandler.showAllCompany();
     }
 
     /**

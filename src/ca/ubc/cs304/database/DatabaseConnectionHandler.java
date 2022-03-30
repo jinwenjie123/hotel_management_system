@@ -384,4 +384,9 @@ public class DatabaseConnectionHandler {
 		}
 		return result;
 	}
+
+	public boolean assignMembership(int customerID, float discount, long credit) {
+		boolean result = false;
+		return result;
+	}
 }
