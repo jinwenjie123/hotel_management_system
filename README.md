@@ -27,15 +27,15 @@ Current progress:
 - [x] /checkRoom
 - [ ] /addRoom
 - [ ] /updateRoom
-- [ ] /addWorker
-- [ ] /deleteWorker
+- [x] /addWorker
+- [x] /deleteWorker
 - [x] /listWorkers
 - [x] /checkWorkerType
 - [x] /checkMembership
 - [ ] /assignMembership
 - [x] /checkBill
 - [x] /checkAllCustomer
-- [ ] /addCustomer
+- [x] /addCustomer
 - [ ] /addHotel
 - [ ] /checkHotel
 - [x] /checkCompany
