@@ -79,6 +79,7 @@ public class TerminalTransactions {
 			System.out.println("10. Check a customers' bills");
 			System.out.println("11. Check all customers of a specific company");
 			System.out.println("12. Quit");
+			System.out.println("15. Add a customer");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -142,23 +143,22 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-
-					case 9:
-						System.out.println("Please enter the RoomNumber, Price, Kind, State, and Hotel_ID in order");
-						try {
-							int roomNumber = Integer.parseInt(bufferedReader.readLine());
-							int price = Integer.parseInt(bufferedReader.readLine());
-							String kind = bufferedReader.readLine();
-							String state = bufferedReader.readLine();
-							int hotelId = Integer.parseInt(bufferedReader.readLine());
-							if(delegate.addRoom(roomNumber, price, kind, state, hotelId)){
-								System.out.println("Add new room successfully!");
-							}
-
-						} catch (IOException e) {
-							e.printStackTrace();
+				case 9:
+					System.out.println("Please enter the RoomNumber, Price, Kind, State, and Hotel_ID in order");
+					try {
+						int roomNumber = Integer.parseInt(bufferedReader.readLine());
+						int price = Integer.parseInt(bufferedReader.readLine());
+						String kind = bufferedReader.readLine();
+						String state = bufferedReader.readLine();
+						int hotelId = Integer.parseInt(bufferedReader.readLine());
+						if(delegate.addRoom(roomNumber, price, kind, state, hotelId)){
+							System.out.println("Add new room successfully!");
 						}
-						break;
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					break;
 				case 10:
 					System.out.println("Please enter the customer's ID:");
 					try {
@@ -197,6 +197,22 @@ public class TerminalTransactions {
 					break;
 				case 12:
 					delegate.terminalTransactionsFinished();
+					break;
+				case 15:
+					try {
+						System.out.println("Please enter the customer's driving license number:");
+						String drivingLicense = bufferedReader.readLine();
+						System.out.println("Please enter the customer's name:");
+						String customerName = bufferedReader.readLine();
+						boolean insertCustomer = delegate.addCustomer(drivingLicense, customerName);
+						if(insertCustomer) {
+							System.out.println("Add customer successfully!");
+						} else {
+							System.out.println("Add Failed! The customer already exists!");
+						}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					break;
 				default:
 					System.out.println(WARNING_TAG + " The number that you entered was not a valid option.");

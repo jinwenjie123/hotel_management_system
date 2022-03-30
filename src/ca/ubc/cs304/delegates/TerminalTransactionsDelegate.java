@@ -33,7 +33,7 @@ public interface TerminalTransactionsDelegate {
 	boolean assignMembership(int customerID, Customer customer);
 
 	List<BillPays> checkBill(int customerID);
-	boolean addCustomer(int customerID, Customer customer);
+	boolean addCustomer(String drivingLicense, String name);
 	List<Customer> checkAllCustomer(int hotelID);
 
 	boolean addHotel(int hotelID, HotelBelongs hotel);

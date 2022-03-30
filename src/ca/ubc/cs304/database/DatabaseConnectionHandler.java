@@ -329,4 +329,21 @@ public class DatabaseConnectionHandler {
 		}
 		return customers;
 	}
+
+	public boolean addCustomer(String drivingLicense, String name) {
+		boolean result = false;
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO CUSTOMER VALUES (?, ?)");
+			ps.setString(1, drivingLicense);
+			ps.setString(2, name);
+
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

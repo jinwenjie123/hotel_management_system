@@ -119,8 +119,10 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     }
 
     @Override
-    public boolean addCustomer(int customerID, Customer customer) {
-        return false;
+    public boolean addCustomer(String drivingLicense, String name) {
+
+        return dbHandler.addCustomer(drivingLicense, name);
+
     }
 
     @Override
