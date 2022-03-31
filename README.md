@@ -39,3 +39,23 @@ Current progress:
 - [ ] /addHotel
 - [ ] /checkHotel
 - [x] /checkCompany
+
+
+Nested aggregation with group-by (4 points to Milestone 3)
+
+Pick one query that finds some aggregated value for each group (e.g. the average number of items purchased per customer).
+- Find the most expensive room of each hotel
+
+Division query (4 points to Milestone 3)
+
+The interface allows the user to choose this query (e.g., find all the customers who bought all the items).
+- Find all customers who have booked all hotels under a specific company.
+
+This criterion is linked to a Learning OutcomeAggregation Query (2 points to Milestone 3)
+
+Pick one query that requires the use of a distinct aggregation operator (min, max, average, or count are all fine).
+- Find the number of available room of a specific hotel.
+
+This criterion is linked to a Learning OutcomeJoin Query (2 points to Milestone 3)
+
+- Pick one query of this category, which joins at least two tables and performs a meaningful query. Interface allows the user to choose this query (e.g., join the Customers and the Transactions table to find the phone numbers of all customers who has purchased a specific item).
