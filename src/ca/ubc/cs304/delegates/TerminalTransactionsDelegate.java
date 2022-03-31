@@ -40,6 +40,7 @@ public interface TerminalTransactionsDelegate {
 	List<HotelBelongs> checkCompany(String companyName);
 
 	List<Company> showAllCompany();
+	List<Room> expensiveRoom();
 	
 	void terminalTransactionsFinished();
 	int numberOfAvailableRoom(int hotelID);

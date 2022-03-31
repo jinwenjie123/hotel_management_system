@@ -10,10 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
-import ca.ubc.cs304.model.BillPays;
-import ca.ubc.cs304.model.Company;
-import ca.ubc.cs304.model.Customer;
-import ca.ubc.cs304.model.HotelBelongs;
+import ca.ubc.cs304.model.*;
 
 /**
  * The class is only responsible for handling terminal text inputs. 
@@ -88,7 +85,8 @@ public class TerminalTransactions {
 			System.out.println("14. Delete a worker");
 			System.out.println("15. Add a customer");
 			System.out.println("16. Check all available rooms in a specific hotel");
-			System.out.println("17. Quit");
+			System.out.println("17. Find the most expensive room of each hotel");
+			System.out.println("18. Quit");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -284,7 +282,15 @@ public class TerminalTransactions {
 						}
 						break;
 
-				case 17:
+					case 17:
+						System.out.println("The room numbers of the most expensive room in each hotel are: \n");
+						List<Room> rooms = delegate.expensiveRoom();
+						for (Room room : rooms) {
+							System.out.println("room number: " + room.getRoom_number() + " in the hotel_id: " + room.getHotel_id() + "\n");
+						}
+						break;
+
+				case 18:
 					delegate.terminalTransactionsFinished();
 					break;
 				default:

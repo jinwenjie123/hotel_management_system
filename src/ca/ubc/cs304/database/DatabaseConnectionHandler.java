@@ -164,6 +164,38 @@ public class DatabaseConnectionHandler {
 		return result;
 	}
 
+	public List<Room> expensiveRoom(){
+		ArrayList<Room> result = new ArrayList<>();
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT\n" +
+					" rl.ROOMNUMBER,\n" +
+					" rl.HOTEL_ID \n" +
+					"FROM\n" +
+					" (SELECT HOTEL_ID, MAX( PRICE ) AS maxPrice FROM ROOM_CONTAINS GROUP BY HOTEL_ID) temp,\n" +
+					" ROOM_CONTAINS rl \n" +
+					"WHERE\n" +
+					" temp.HOTEL_ID = rl.HOTEL_ID \n" +
+					" AND temp.maxPrice = rl.PRICE";
+
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				Room model = new Room(rs.getInt("ROOMNUMBER"),
+						0,
+						null,
+						null,
+						rs.getInt("HOTEL_ID"));
+				result.add(model);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	public ArrayList<Room> listRoom(int hotelId){
 		ArrayList<Room> result = new ArrayList<>();
 		try {
