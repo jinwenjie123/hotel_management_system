@@ -1,9 +1,6 @@
 package ca.ubc.cs304.delegates;
 
-import ca.ubc.cs304.model.BillPays;
-import ca.ubc.cs304.model.Customer;
-import ca.ubc.cs304.model.HotelBelongs;
-import ca.ubc.cs304.model.WorkerWorks;
+import ca.ubc.cs304.model.*;
 
 import java.util.Date;
 import java.util.List;
@@ -31,7 +28,7 @@ public interface TerminalTransactionsDelegate {
 	String checkWorkerType(int workerID);
 
 	boolean checkMembership(int customerID);
-	boolean assignMembership(int customerID, Customer customer);
+	boolean assignMembership(int customerID, float discount, long credit);
 
 	List<BillPays> checkBill(int customerID);
 	boolean addCustomer(String drivingLicense, String name);
@@ -42,6 +39,7 @@ public interface TerminalTransactionsDelegate {
 	HotelBelongs checkHotel(int hotelID);
 	List<HotelBelongs> checkCompany(String companyName);
 
+	List<Company> showAllCompany();
 	
 	void terminalTransactionsFinished();
 }
