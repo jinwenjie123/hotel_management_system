@@ -124,10 +124,16 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
     }
 
     @Override
+    public int numberOfAvailableRoom(int hotelID){
+        return dbHandler.numberOfAvailableRoom(hotelID);
+    }
+
+    @Override
     public List<Customer> checkAllCustomer(int hotelID) {
         List<Customer> result = dbHandler.checkAllCustomer(hotelID);
         return result;
     }
+
 
     @Override
     public boolean addHotel(int hotelID, HotelBelongs hotel) {

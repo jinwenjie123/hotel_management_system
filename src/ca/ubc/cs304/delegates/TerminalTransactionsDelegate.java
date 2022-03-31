@@ -42,4 +42,5 @@ public interface TerminalTransactionsDelegate {
 	List<Company> showAllCompany();
 	
 	void terminalTransactionsFinished();
+	int numberOfAvailableRoom(int hotelID);
 }

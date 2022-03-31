@@ -85,10 +85,10 @@ public class TerminalTransactions {
 			System.out.println("11. Check all customers of a specific company");
 			System.out.println("12. Add a new worker");
 			System.out.println("13. Update the room status");
-
 			System.out.println("14. Delete a worker");
 			System.out.println("15. Add a customer");
-			System.out.println("16. Quit");
+			System.out.println("16. Check all available rooms in a specific hotel");
+			System.out.println("17. Quit");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -267,7 +267,24 @@ public class TerminalTransactions {
 						e.printStackTrace();
 					}
 					break;
-				case 16:
+
+					case 16:
+						try {
+							System.out.println("Please enter the hotel ID to find the number of available rooms");
+							int hotelID = Integer.parseInt(bufferedReader.readLine());
+							int numRoom = delegate.numberOfAvailableRoom(hotelID);
+							if(numRoom == -1){
+								System.out.println("Wrong");
+							}else{
+								System.out.println("The total number of available room is:" + numRoom);
+							}
+
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+
+				case 17:
 					delegate.terminalTransactionsFinished();
 					break;
 				default:

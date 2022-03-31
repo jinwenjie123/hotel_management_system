@@ -320,6 +320,29 @@ public class DatabaseConnectionHandler {
 		return false;
 	}
 
+	public int numberOfAvailableRoom(int hotelID){
+		int numRooms = -1;
+		try {
+			Statement stmt = connection.createStatement();
+			PreparedStatement ps = connection.prepareStatement("SELECT COUNT(ROOMNUMBER) AS total FROM ROOM_CONTAINS WHERE STATE = ? AND HOTEL_ID = ?");
+			ps.setString(1, "Available");
+			ps.setInt(2, hotelID);
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()){
+				numRooms = rs.getInt("total");
+			}
+
+			rs.close();
+			stmt.close();
+			return numRooms;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return numRooms;
+	}
+
 	public boolean deleteWorker(int workerID){
 		try {
 			Statement stmt = connection.createStatement();
@@ -333,8 +356,6 @@ public class DatabaseConnectionHandler {
 		}
 		return false;
 	}
-
-
 
 	public List<BillPays> checkBill(int customerID) {
 		ArrayList<BillPays> bills = new ArrayList<>();
