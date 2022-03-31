@@ -60,7 +60,7 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
 
     @Override
     public boolean updateRoom(int hotelID, int roomNumber, int price, String state, String kind) {
-        return false;
+        return dbHandler.updateRoom(hotelID, roomNumber, price, kind, state);
     }
 
     @Override

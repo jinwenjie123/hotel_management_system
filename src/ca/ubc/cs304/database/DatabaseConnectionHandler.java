@@ -276,6 +276,27 @@ public class DatabaseConnectionHandler {
 		return false;
 	}
 
+	public boolean updateRoom(int hotelID, int roomNumber, int price, String state, String kind){
+		try {
+			PreparedStatement ps = connection.prepareStatement("UPDATE ROOM_CONTAINS SET HOTEL_ID = ?, ROOMNUMBER = ?, PRICE = ?, STATE = ?, KIND = ? WHERE HOTEL_ID = ? AND ROOMNUMBER = ?");
+			ps.setInt(1, hotelID);
+			ps.setInt(2,roomNumber);
+			ps.setInt(3, price);
+			ps.setString(4, state);
+			ps.setString(5,kind);
+			ps.setInt(6,hotelID);
+			ps.setInt(7,roomNumber);
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount >= 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	public boolean addWorker(int workerId, int dId, String name, String birthdayString, String sex, String department, String contract_start_time_string){
 		try {
 			Statement stmt = connection.createStatement();
