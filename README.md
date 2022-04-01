@@ -49,7 +49,7 @@ Pick one query that finds some aggregated value for each group (e.g. the average
 Division query (4 points to Milestone 3)
 
 The interface allows the user to choose this query (e.g., find all the customers who bought all the items).
-- Find all customers who have booked all hotels under a specific company.
+- Find the hotel ID whose room are all occupied. 
 
 This criterion is linked to a Learning OutcomeAggregation Query (2 points to Milestone 3)
 
