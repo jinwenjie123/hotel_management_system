@@ -86,7 +86,8 @@ public class TerminalTransactions {
 			System.out.println("15. Add a customer");
 			System.out.println("16. Check all available rooms in a specific hotel");
 			System.out.println("17. Find the most expensive room of each hotel");
-			System.out.println("18. Quit");
+			System.out.println("18. Find hotels with no available rooms");
+			System.out.println("19. Quit");
 			System.out.print("Please choose one of the above 5 options: ");
 
 			choice = readInteger(false);
@@ -289,8 +290,18 @@ public class TerminalTransactions {
 							System.out.println("room number: " + room.getRoom_number() + " in the hotel_id: " + room.getHotel_id() + "\n");
 						}
 						break;
-
 				case 18:
+					List<HotelBelongs> hotels = delegate.showFullHotels();
+					if(!hotels.isEmpty()) {
+						for(HotelBelongs hotel : hotels) {
+							System.out.println(hotel.getHotelName());
+							System.out.println(hotel.getAddress());
+						}
+					} else {
+						System.out.println("All hotels have available rooms!");
+					}
+						break;
+				case 19:
 					delegate.terminalTransactionsFinished();
 					break;
 				default:

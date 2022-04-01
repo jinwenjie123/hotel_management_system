@@ -59,3 +59,4 @@ Pick one query that requires the use of a distinct aggregation operator (min, ma
 This criterion is linked to a Learning OutcomeJoin Query (2 points to Milestone 3)
 
 - Pick one query of this category, which joins at least two tables and performs a meaningful query. Interface allows the user to choose this query (e.g., join the Customers and the Transactions table to find the phone numbers of all customers who has purchased a specific item).
+- checkAllCustomer(); // join customer_stay and customer tables

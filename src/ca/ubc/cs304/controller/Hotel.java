@@ -187,6 +187,12 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
         return dbHandler.expensiveRoom();
     }
 
+    @Override
+    public List<HotelBelongs> showFullHotels() {
+        List<HotelBelongs> results = dbHandler.showFullHotels();
+        return results;
+    }
+
     /**
      * Main method called at launch time
      */

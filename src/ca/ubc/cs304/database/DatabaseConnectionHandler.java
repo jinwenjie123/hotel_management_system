@@ -465,4 +465,30 @@ public class DatabaseConnectionHandler {
 		boolean result = false;
 		return result;
 	}
+
+	public List<HotelBelongs> showFullHotels() {
+		ArrayList<HotelBelongs> hotels = new ArrayList<>();
+		HotelBelongs hotel;
+		try {
+			Statement stmt = connection.createStatement();
+			String query = "SELECT DISTINCT * FROM HOTEL_BELONGS WHERE ID NOT IN ( SELECT HOTEL_ID FROM ROOM_CONTAINS WHERE ROOMNUMBER IN (( SELECT DISTINCT ROOMNUMBER FROM ROOM_CONTAINS ) MINUS ( SELECT ROOMNUMBER FROM ROOM_CONTAINS WHERE STATE = 'Occupied' )))";
+			ResultSet rs = stmt.executeQuery(query);
+
+			if (rs.next()) {
+				hotel = new HotelBelongs(rs.getInt("ID"),
+						rs.getString("HOTELNAME"),
+						rs.getString("COMPANYNAME"),
+						rs.getLong("REVENUE"),
+						rs.getString("ADDRESS"),
+						rs.getDate("BUILTTIME"),
+						rs.getFloat("RATING"));
+				hotels.add(hotel);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return hotels;
+	}
 }
