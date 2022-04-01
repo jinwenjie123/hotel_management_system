@@ -420,9 +420,10 @@ public class DatabaseConnectionHandler {
 		Customer customer;
 		try {
 			Statement stmt = connection.createStatement();
-			String query = "SELECT * FROM CUSTOMER_STAY WHERE HOTEL_ID = " + "'" + hotelID + "'";
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM CUSTOMER_STAY, CUSTOMER WHERE HOTEL_ID = ? AND CUSTOMER_STAY.DRIVING_LICENSE = CUSTOMER.DRIVING_LICENSE");
 
-			ResultSet rs = stmt.executeQuery(query);
+			ps.setInt(1, hotelID);
+			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				customer = new Customer(rs.getInt("cID"),
@@ -431,7 +432,8 @@ public class DatabaseConnectionHandler {
 						rs.getString("phone_number"),
 						rs.getString("driving_license"),
 						rs.getDate("checkin_time"),
-						rs.getDate("checkout_time"));
+						rs.getDate("checkout_time"),
+						rs.getString("name"));
 				customers.add(customer);
 			}
 			rs.close();

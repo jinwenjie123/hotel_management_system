@@ -10,8 +10,9 @@ public class Customer {
     private String drivingLicense;
     private Date checkinTime;
     private Date checkoutTime;
+    private String name;
 
-    public Customer(int cID, int hotelID, String address, String phoneNumber, String drivingLicense, Date checkinTime, Date checkoutTime) {
+    public Customer(int cID, int hotelID, String address, String phoneNumber, String drivingLicense, Date checkinTime, Date checkoutTime, String name) {
         this.cID = cID;
         this.hotelID = hotelID;
         this.address = address;
@@ -19,6 +20,15 @@ public class Customer {
         this.drivingLicense = drivingLicense;
         this.checkinTime = checkinTime;
         this.checkoutTime = checkoutTime;
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public int getcID() {

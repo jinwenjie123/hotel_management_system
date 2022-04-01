@@ -79,7 +79,7 @@ public class TerminalTransactions {
 			System.out.println("8. Check Room information");
 			System.out.println("9. Add a new room");
 			System.out.println("10. Check a customers' bills");
-			System.out.println("11. Check all customers of a specific company");
+			System.out.println("11. Check all customers of a specific hotel");
 			System.out.println("12. Add a new worker");
 			System.out.println("13. Update the room status");
 			System.out.println("14. Delete a worker");
@@ -194,7 +194,7 @@ public class TerminalTransactions {
 						List<Customer> customers = delegate.checkAllCustomer(hotelID);
 						if(customers != null) {
 							for (Customer customer : customers) {
-								System.out.println();
+								System.out.println("Name: " + customer.getName() + " CID: " + customer.getcID() + " Hotel_id: " + customer.getHotelID() + " address: " + customer.getAddress() + " phone: " + customer.getPhoneNumber() + " driving license: " + customer.getDrivingLicense() + " checkin_time: " + customer.getCheckinTime() + " checkout time: " + customer.getCheckoutTime() + "\n");
 							}
 						} else {
 							System.out.println("This hotel currently has no customer! Poor hotel!");
