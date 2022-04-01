@@ -161,9 +161,7 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
         List<HotelBelongs> hotels = dbHandler.checkCompany(companyName);
 
         for(HotelBelongs hotel : hotels) {
-            System.out.println(hotel.getAddress());
-            System.out.println(hotel.getHotelName());
-            System.out.println(hotel.getBuiltTime());
+            System.out.println("Hotel name: " + hotel.getHotelName() + " Address: " + hotel.getAddress() + " Build-time: " + hotel.getBuiltTime());
         }
 
         return hotels;
