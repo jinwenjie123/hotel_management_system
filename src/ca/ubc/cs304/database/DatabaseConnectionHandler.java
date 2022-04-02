@@ -461,8 +461,23 @@ public class DatabaseConnectionHandler {
 		return result;
 	}
 
-	public boolean assignMembership(int customerID, float discount, long credit) {
+	public boolean assignMembership(int membershipID, int customerID, String joinDate, float discount, long credit) {
 		boolean result = false;
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO MEMBERSHIP_APPLIES VALUES (?, ?, ?, ?, ?)");
+			ps.setInt(1, membershipID);
+			ps.setInt(2, customerID);
+			ps.setString(3, joinDate);
+			ps.setFloat(4, discount);
+			ps.setLong(5, credit);
+
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+			result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 
@@ -491,5 +506,57 @@ public class DatabaseConnectionHandler {
 			e.printStackTrace();
 		}
 		return hotels;
+	}
+
+	public List<HotelBelongs> checkHotel(int hotelID) {
+		ArrayList<HotelBelongs> hotels = new ArrayList<>();
+		HotelBelongs hotel;
+		try {
+			Statement stmt = connection.createStatement();
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM HOTEL_BELONGS WHERE ID = ?");
+
+			ps.setInt(1, hotelID);
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()) {
+				hotel = new HotelBelongs(rs.getInt("ID"),
+						rs.getString("hotelName"),
+						rs.getString("companyName"),
+						rs.getDouble("revenue"),
+						rs.getString("address"),
+						rs.getDate("builtTime"),
+						rs.getFloat("rating"));
+				hotels.add(hotel);
+			}
+
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return hotels;
+	}
+
+	public boolean addHotel(int hotelId, String hotelName, String companyName, double revenue, String address, String builtTime, double rating) {
+		boolean result = false;
+		try{
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO HOTEL_BELONGS VALUES (?, ?, ?, ?, ?, ?, ?)");
+			ps.setInt(1, hotelId);
+			ps.setString(2, hotelName);
+			ps.setString(3, companyName);
+			ps.setDouble(4, revenue);
+			ps.setString(5, address);
+			ps.setDate(6, java.sql.Date.valueOf(builtTime));
+			ps.setDouble(7, rating);
+
+			ps.executeUpdate();
+			connection.commit();
+			ps.close();
+			result = true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

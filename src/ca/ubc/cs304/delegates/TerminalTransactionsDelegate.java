@@ -28,15 +28,15 @@ public interface TerminalTransactionsDelegate {
 	String checkWorkerType(int workerID);
 
 	boolean checkMembership(int customerID);
-	boolean assignMembership(int customerID, float discount, long credit);
+	boolean assignMembership(int membershipID, int customerID, String joinDate, float discount, long credit);
 
 	List<BillPays> checkBill(int customerID);
 	boolean addCustomer(String drivingLicense, String name);
 	List<Customer> checkAllCustomer(int hotelID);
 
-	boolean addHotel(int hotelID, HotelBelongs hotel);
+	boolean addHotel(int hotelID, String hotelName, String companyName, double revenue, String address, String builtTime, double rating);
 	boolean addRoom(int roomNumber, int price, String kind, String state, int hotelId);
-	HotelBelongs checkHotel(int hotelID);
+	List<HotelBelongs> checkHotel(int hotelID);
 	List<HotelBelongs> checkCompany(String companyName);
 
 	List<Company> showAllCompany();

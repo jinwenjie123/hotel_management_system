@@ -20,39 +20,39 @@ public class TerminalTransactions {
 	private static final String WARNING_TAG = "[WARNING]";
 	private static final int INVALID_INPUT = Integer.MIN_VALUE;
 	private static final int EMPTY_INPUT = 0;
-	
+
 	private BufferedReader bufferedReader = null;
 	private TerminalTransactionsDelegate delegate = null;
 
 	public TerminalTransactions() {
 	}
-	
+
 	/**
 	 * Sets up the database to have a branch table with two tuples so we can insert/update/delete from it.
 	 * Refer to the databaseSetup.sql file to determine what tuples are going to be in the table.
 	 */
 	public void setupDatabase(TerminalTransactionsDelegate delegate) {
 		this.delegate = delegate;
-		
+
 		bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		int choice = INVALID_INPUT;
-		
+
 		while(choice != 1 && choice != 2) {
 			System.out.println("Welcome to Sunday Hotel Management System! If you want to proceed, enter 1; if you want to quit, enter 2.");
-			
+
 			choice = readInteger(false);
-			
+
 			if (choice != INVALID_INPUT) {
 				switch (choice) {
-				case 1:  
-					delegate.databaseSetup(); 
-					break;
-				case 2:  
-					handleQuitOption();
-					break;
-				default:
-					System.out.println(WARNING_TAG + " The number that you entered was not a valid option.\n");
-					break;
+					case 1:
+						delegate.databaseSetup();
+						break;
+					case 2:
+						handleQuitOption();
+						break;
+					default:
+						System.out.println(WARNING_TAG + " The number that you entered was not a valid option.\n");
+						break;
 				}
 			}
 		}
@@ -60,13 +60,13 @@ public class TerminalTransactions {
 
 	/**
 	 * Displays simple text interface
-	 */ 
+	 */
 	public void showMainMenu(TerminalTransactionsDelegate delegate) {
 		this.delegate = delegate;
-		
-	    bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+		bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		int choice = INVALID_INPUT;
-		
+
 		while (choice != 17) {
 			System.out.println();
 			System.out.println("1. Show all company");
@@ -82,11 +82,14 @@ public class TerminalTransactions {
 			System.out.println("11. Update the room status");
 			System.out.println("12. Delete a worker");
 			System.out.println("13. Add a customer");
-			System.out.println("14. Check all available rooms in a specific hotel");
-			System.out.println("15. Find the most expensive room of each hotel");
-			System.out.println("16. Find hotels with no available rooms");
-			System.out.println("17. Quit");
-			System.out.print("Please choose one of the above 17 options: ");
+			System.out.println("14. Assign a membership to a customer");
+			System.out.println("15. Add a hotel");
+			System.out.println("16. Check a hotel's information");
+			System.out.println("17. Check all available rooms in a specific hotel");
+			System.out.println("18. Find the most expensive room of each hotel");
+			System.out.println("19. Find hotels with no available rooms");
+			System.out.println("20. Quit");
+			System.out.print("Please choose one of the above 20 options: ");
 
 			choice = readInteger(false);
 
@@ -94,29 +97,29 @@ public class TerminalTransactions {
 
 			if (choice != INVALID_INPUT) {
 				switch (choice) {
-				case 1:  
-					handleShowAllCompanyOption();
-					break;
-				case 2:
-					System.out.println("Please enter the company's name:");
-					try {
-						String companyName = bufferedReader.readLine();
-						List<HotelBelongs> hotels = delegate.checkCompany(companyName);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					break;
-				case 3:
-					System.out.println("Please enter the departmentID and hotelID");
-					try {
-						int departmentID = Integer.parseInt(bufferedReader.readLine());
-						int hotelID = Integer.parseInt(bufferedReader.readLine());
-						delegate.listWorker(departmentID, hotelID);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					break;
-				case 4:
+					case 1:
+						handleShowAllCompanyOption();
+						break;
+					case 2:
+						System.out.println("Please enter the company's name:");
+						try {
+							String companyName = bufferedReader.readLine();
+							List<HotelBelongs> hotels = delegate.checkCompany(companyName);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 3:
+						System.out.println("Please enter the departmentID and hotelID");
+						try {
+							int departmentID = Integer.parseInt(bufferedReader.readLine());
+							int hotelID = Integer.parseInt(bufferedReader.readLine());
+							delegate.listWorker(departmentID, hotelID);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 4:
 						System.out.println("Please enter the worker's ID");
 						try {
 							int workerID = Integer.parseInt(bufferedReader.readLine());
@@ -125,7 +128,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-				case 5:
+					case 5:
 						System.out.println("Please enter the customer's ID:");
 						try {
 							int customerID = Integer.parseInt(bufferedReader.readLine());
@@ -134,7 +137,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-				case 6:
+					case 6:
 						System.out.println("Please enter the hotel ID");
 						try {
 							int hotelID = Integer.parseInt(bufferedReader.readLine());
@@ -144,7 +147,7 @@ public class TerminalTransactions {
 						}
 						break;
 
-				case 7:
+					case 7:
 						System.out.println("Please enter the RoomNumber, Price, Kind, State, and Hotel_ID in order");
 						try {
 							int roomNumber = Integer.parseInt(bufferedReader.readLine());
@@ -160,62 +163,62 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-				case 8:
-					System.out.println("Please enter the customer's ID:");
-					try {
-						int customerID = Integer.parseInt(bufferedReader.readLine());
-						List<BillPays> bills = delegate.checkBill(customerID);
-						if(!bills.isEmpty()) {
-							for(BillPays bill : bills) {
-								System.out.println(bill.getbID());
-								System.out.println(bill.getcID());
-								System.out.println(bill.getPrice());
-								System.out.println(bill.getPaymentDate());
-								System.out.println(bill.getPaymentMethod());
+					case 8:
+						System.out.println("Please enter the customer's ID:");
+						try {
+							int customerID = Integer.parseInt(bufferedReader.readLine());
+							List<BillPays> bills = delegate.checkBill(customerID);
+							if(!bills.isEmpty()) {
+								for(BillPays bill : bills) {
+									System.out.println(bill.getbID());
+									System.out.println(bill.getcID());
+									System.out.println(bill.getPrice());
+									System.out.println(bill.getPaymentDate());
+									System.out.println(bill.getPaymentMethod());
+								}
+							} else {
+								System.out.println("The customer doesn't have any bills!");
 							}
-						} else {
-							System.out.println("The customer doesn't have any bills!");
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					break;
-				case 9:
-					try {
-						System.out.println("Please enter the hotel's ID:");
-						int hotelID = Integer.parseInt(bufferedReader.readLine());
-						List<Customer> customers = delegate.checkAllCustomer(hotelID);
-						if(customers != null) {
-							for (Customer customer : customers) {
-								System.out.println("Name: " + customer.getName() + " CID: " + customer.getcID() + " Hotel_id: " + customer.getHotelID() + " address: " + customer.getAddress() + " phone: " + customer.getPhoneNumber() + " driving license: " + customer.getDrivingLicense() + " checkin_time: " + customer.getCheckinTime() + " checkout time: " + customer.getCheckoutTime() + "\n");
+						break;
+					case 9:
+						try {
+							System.out.println("Please enter the hotel's ID:");
+							int hotelID = Integer.parseInt(bufferedReader.readLine());
+							List<Customer> customers = delegate.checkAllCustomer(hotelID);
+							if(customers != null) {
+								for (Customer customer : customers) {
+									System.out.println("Name: " + customer.getName() + " CID: " + customer.getcID() + " Hotel_id: " + customer.getHotelID() + " address: " + customer.getAddress() + " phone: " + customer.getPhoneNumber() + " driving license: " + customer.getDrivingLicense() + " checkin_time: " + customer.getCheckinTime() + " checkout time: " + customer.getCheckoutTime() + "\n");
+								}
+							} else {
+								System.out.println("This hotel currently has no customer! Poor hotel!");
 							}
-						} else {
-							System.out.println("This hotel currently has no customer! Poor hotel!");
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					break;
+						break;
 
-				case 10:
-					try {
-						System.out.println("Please enter a new worker's workerId, departmentId, name, birthdate, gender, department, contract start time");
-						int workerId = Integer.parseInt(bufferedReader.readLine());
-						int dId = Integer.parseInt(bufferedReader.readLine());
-						String name = bufferedReader.readLine();
-						String birthDayString = bufferedReader.readLine();
-						String sex = bufferedReader.readLine();
-						String department = bufferedReader.readLine();
-						String contract_start_time_string = bufferedReader.readLine();
-						if(delegate.addWorker(workerId, dId, name, birthDayString, sex,department, contract_start_time_string)){
-							System.out.println("Add new worker successfully!");
+					case 10:
+						try {
+							System.out.println("Please enter a new worker's workerId, departmentId, name, birthdate, gender, department, contract start time");
+							int workerId = Integer.parseInt(bufferedReader.readLine());
+							int dId = Integer.parseInt(bufferedReader.readLine());
+							String name = bufferedReader.readLine();
+							String birthDayString = bufferedReader.readLine();
+							String sex = bufferedReader.readLine();
+							String department = bufferedReader.readLine();
+							String contract_start_time_string = bufferedReader.readLine();
+							if(delegate.addWorker(workerId, dId, name, birthDayString, sex,department, contract_start_time_string)){
+								System.out.println("Add new worker successfully!");
+							}
+
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					break;
-				case 11:
+						break;
+					case 11:
 						try {
 							System.out.println("Please enter the room's information.(including hotelID, roomNumber, price, state, and kind)");
 							int hotelID = Integer.parseInt(bufferedReader.readLine());
@@ -231,77 +234,136 @@ public class TerminalTransactions {
 						}
 						break;
 
-				case 12:
-					try {
-						System.out.println("Please enter the worker's wID");
-						int workerID = Integer.parseInt(bufferedReader.readLine());
-						if(delegate.deleteWorker(workerID)){
-							System.out.println("Delete the worker's information successfully!");
+					case 12:
+						try {
+							System.out.println("Please enter the worker's wID");
+							int workerID = Integer.parseInt(bufferedReader.readLine());
+							if(delegate.deleteWorker(workerID)){
+								System.out.println("Delete the worker's information successfully!");
+							}
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					break;
-				case 13:
-					try {
-						System.out.println("Please enter the customer's driving license number:");
-						String drivingLicense = bufferedReader.readLine();
-						System.out.println("Please enter the customer's name:");
-						String customerName = bufferedReader.readLine();
-						boolean insertCustomer = delegate.addCustomer(drivingLicense, customerName);
-						if(insertCustomer) {
-							System.out.println("Add customer successfully!");
-						} else {
-							System.out.println("Add Failed! The customer already exists!");
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					break;
-				case 14:
-					try {
-						System.out.println("Please enter the hotel ID to find the number of available rooms");
-						int hotelID = Integer.parseInt(bufferedReader.readLine());
-						int numRoom = delegate.numberOfAvailableRoom(hotelID);
-						if(numRoom == -1){
-							System.out.println("Wrong");
-						}else{
-							System.out.println("The total number of available room is:" + numRoom);
-						}
-
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					break;
-				case 15:
-					System.out.println("The room numbers of the most expensive room in each hotel are: \n");
-					List<Room> rooms = delegate.expensiveRoom();
-					for (Room room : rooms) {
-						System.out.println("room number: " + room.getRoom_number() + " in the hotel_id: " + room.getHotel_id() + "\n");
-					}
-					break;
-				case 16:
-					List<HotelBelongs> hotels = delegate.showFullHotels();
-					if(!hotels.isEmpty()) {
-						for(HotelBelongs hotel : hotels) {
-							System.out.println(hotel.getHotelName());
-							System.out.println(hotel.getAddress());
-						}
-					} else {
-						System.out.println("All hotels have available rooms!");
-					}
 						break;
-				case 17:
-					delegate.terminalTransactionsFinished();
-					break;
-				default:
-					System.out.println(WARNING_TAG + " The number that you entered was not a valid option.");
-					break;
+					case 13:
+						try {
+							System.out.println("Please enter the customer's driving license number:");
+							String drivingLicense = bufferedReader.readLine();
+							System.out.println("Please enter the customer's name:");
+							String customerName = bufferedReader.readLine();
+							boolean insertCustomer = delegate.addCustomer(drivingLicense, customerName);
+							if(insertCustomer) {
+								System.out.println("Add customer successfully!");
+							} else {
+								System.out.println("Add Failed! The customer already exists!");
+							}
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 14:
+						try {
+							System.out.println("Please enter the membership ID:");
+							int membershipID = Integer.parseInt(bufferedReader.readLine());
+							System.out.println("Please enter the customer's ID:");
+							int customerID = Integer.parseInt(bufferedReader.readLine());
+							System.out.println("Please enter the join date:");
+							String joinDate = bufferedReader.readLine();
+							System.out.println("Please enter the membership discount:");
+							float discount = Float.parseFloat(bufferedReader.readLine());
+							System.out.println("Please enter the customer's credit:");
+							long credit = Long.parseLong(bufferedReader.readLine());
+
+							boolean assignMembership = delegate.assignMembership(membershipID, customerID, joinDate, discount, credit);
+							if(assignMembership) {
+								System.out.println("Membership assigned successfully!");
+							} else {
+								System.out.println("Assignment Failed!");
+							}
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 15:
+						try {
+							System.out.println("Please enter the hotel's ID:");
+							int hotelId = Integer.parseInt(bufferedReader.readLine());
+							System.out.println("Please enter the hotel's name:");
+							String hotelName = bufferedReader.readLine();
+							System.out.println("Please enter the company's name:");
+							String companyName = bufferedReader.readLine();
+							System.out.println("Please enter the hotel's annual revenue:");
+							double revenue = Double.parseDouble(bufferedReader.readLine());
+							System.out.println("Please enter the hotel's address:");
+							String address = bufferedReader.readLine();
+							System.out.println("Please enter the hotel's build date:");
+							String builtTime = bufferedReader.readLine();
+							System.out.println("Please enter the hotel's rating:");
+							float rating = Float.parseFloat(bufferedReader.readLine());
+
+							boolean insertHotel = delegate.addHotel(hotelId, hotelName, companyName, revenue, address, builtTime, rating);
+							if(insertHotel) {
+								System.out.println("Add hotel successfully!");
+							} else {
+								System.out.println("Add Failed!");
+							}
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 16:
+						try {
+							System.out.println("Please enter the hotel's ID:");
+							int hotelID = Integer.parseInt(bufferedReader.readLine());
+							List<HotelBelongs> hotels = delegate.checkHotel(hotelID);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 17:
+						try {
+							System.out.println("Please enter the hotel ID to find the number of available rooms");
+							int hotelID = Integer.parseInt(bufferedReader.readLine());
+							int numRoom = delegate.numberOfAvailableRoom(hotelID);
+							if(numRoom == -1){
+								System.out.println("Wrong");
+							}else{
+								System.out.println("The total number of available room is:" + numRoom);
+							}
+
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						break;
+					case 18:
+						System.out.println("The room numbers of the most expensive room in each hotel are: \n");
+						List<Room> rooms = delegate.expensiveRoom();
+						for (Room room : rooms) {
+							System.out.println("room number: " + room.getRoom_number() + " in the hotel_id: " + room.getHotel_id() + "\n");
+						}
+						break;
+					case 19:
+						List<HotelBelongs> hotels = delegate.showFullHotels();
+						if(!hotels.isEmpty()) {
+							for(HotelBelongs hotel : hotels) {
+								System.out.println(hotel.getHotelName());
+								System.out.println(hotel.getAddress());
+							}
+						} else {
+							System.out.println("All hotels have available rooms!");
+						}
+						break;
+					case 20:
+						delegate.terminalTransactionsFinished();
+						break;
+					default:
+						System.out.println(WARNING_TAG + " The number that you entered was not a valid option.");
+						break;
 				}
 			}
-		}		
+		}
 	}
-	
+
 	private void handleDeleteOption() {
 //		int branchId = INVALID_INPUT;
 //		while (branchId == INVALID_INPUT) {
@@ -312,7 +374,7 @@ public class TerminalTransactions {
 //			}
 //		}
 	}
-	
+
 	private void handleShowAllCompanyOption() {
 		List<Company> companies = delegate.showAllCompany();
 		for (Company company : companies) {
@@ -322,10 +384,10 @@ public class TerminalTransactions {
 			System.out.println(company.getMarketPrice());
 		}
 	}
-	
+
 	private void handleQuitOption() {
 		System.out.println("Good Bye!");
-		
+
 		if (bufferedReader != null) {
 			try {
 				bufferedReader.close();
@@ -333,10 +395,10 @@ public class TerminalTransactions {
 				System.out.println("IOException!");
 			}
 		}
-		
+
 		delegate.terminalTransactionsFinished();
 	}
-	
+
 	private void handleUpdateOption() {
 //		int id = INVALID_INPUT;
 //		while (id == INVALID_INPUT) {
@@ -352,7 +414,7 @@ public class TerminalTransactions {
 //
 //		delegate.updateBranch(id, name);
 	}
-	
+
 	private int readInteger(boolean allowEmpty) {
 		String line = null;
 		int input = INVALID_INPUT;
@@ -370,7 +432,7 @@ public class TerminalTransactions {
 		}
 		return input;
 	}
-	
+
 	private String readLine() {
 		String result = null;
 		try {
