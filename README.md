@@ -32,12 +32,12 @@ Current progress:
 - [x] /listWorkers
 - [x] /checkWorkerType
 - [x] /checkMembership
-- [ ] /assignMembership
+- [x] /assignMembership
 - [x] /checkBill
 - [x] /checkAllCustomer
 - [x] /addCustomer
-- [ ] /addHotel
-- [ ] /checkHotel
+- [x] /addHotel
+- [x] /checkHotel
 - [x] /checkCompany
 
 
