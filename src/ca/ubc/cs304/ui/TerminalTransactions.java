@@ -367,10 +367,7 @@ public class TerminalTransactions {
 	private void handleShowAllCompanyOption() {
 		List<Company> companies = delegate.showAllCompany();
 		for (Company company : companies) {
-			System.out.println(company.getName());
-			System.out.println(company.getAddress());
-			System.out.println(company.getBuiltTime());
-			System.out.println(company.getMarketPrice());
+			System.out.println(company.getName() + " | " + company.getAddress() + " | " + company.getBuiltTime() + " | " + company.getMarketPrice());
 		}
 	}
 
