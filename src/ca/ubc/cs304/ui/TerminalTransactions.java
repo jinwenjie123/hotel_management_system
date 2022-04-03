@@ -69,26 +69,16 @@ public class TerminalTransactions {
 
 		while (choice != 17) {
 			System.out.println();
-			System.out.println("1. Show all company");
-			System.out.println("2. Show hotels of a specific company");
-			System.out.println("3. Show workers under a specific department");
-			System.out.println("4. Check whether a worker is part time or full time");
-			System.out.println("5. Check whether a customer is a membership");
-			System.out.println("6. Check Room information");
-			System.out.println("7. Add a new room");
-			System.out.println("8. Check a customers' bills");
-			System.out.println("9. Check all customers of a specific hotel");
-			System.out.println("10. Add a new worker");
-			System.out.println("11. Update the room status");
-			System.out.println("12. Delete a worker");
-			System.out.println("13. Add a customer");
-			System.out.println("14. Assign a membership to a customer");
-			System.out.println("15. Add a hotel");
-			System.out.println("16. Check a hotel's information");
-			System.out.println("17. Check all available rooms in a specific hotel");
-			System.out.println("18. Find the most expensive room of each hotel");
-			System.out.println("19. Find hotels with no available rooms");
-			System.out.println("20. Quit");
+			System.out.println("|-------------------------------------------------------------- MENU ----------------------------------------------------------------------------|");
+			System.out.println("| 1. Show all company                         | 2. Show hotels under a specific company            | 3. Add a hotel                              |");
+			System.out.println("| 4. Find hotels with no available rooms      | 5. Find the most expensive room of each hotel      | 6. Check all available rooms in a hotel     |");
+			System.out.println("| 7. Update the room status                   | 8. Add a new room                                  | 9. Check Room information                   |");
+			System.out.println("| 10. Show workers under a specific department| 11. Check a worker's work type(part-time/full-time)| 12. Add a new worker                        |");
+			System.out.println("| 13. Delete a worker                         | 14. Check all customers of a specific hotel        | 15. Check whether a customer is a membership|");
+			System.out.println("| 16. Check a customers' bills                | 17. Add a customer                                 | 18. Assign a membership to a customer       |");
+			System.out.println("| 19. Check a hotel's information             | 20. Quit                                           |                                             |");
+			System.out.println("|------------------------------------------------------------------------------------------------------------------------------------------------|");
+			System.out.print("Please choose one of the above 20 options: ");
 			System.out.print("Please choose one of the above 20 options: ");
 
 			choice = readInteger(false);
@@ -109,7 +99,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 3:
+					case 10:
 						System.out.println("Please enter the departmentID and hotelID");
 						try {
 							int departmentID = Integer.parseInt(bufferedReader.readLine());
@@ -119,7 +109,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 4:
+					case 11:
 						System.out.println("Please enter the worker's ID");
 						try {
 							int workerID = Integer.parseInt(bufferedReader.readLine());
@@ -128,7 +118,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 5:
+					case 15:
 						System.out.println("Please enter the customer's ID:");
 						try {
 							int customerID = Integer.parseInt(bufferedReader.readLine());
@@ -137,7 +127,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 6:
+					case 9:
 						System.out.println("Please enter the hotel ID");
 						try {
 							int hotelID = Integer.parseInt(bufferedReader.readLine());
@@ -147,7 +137,7 @@ public class TerminalTransactions {
 						}
 						break;
 
-					case 7:
+					case 8:
 						System.out.println("Please enter the RoomNumber, Price, Kind, State, and Hotel_ID in order");
 						try {
 							int roomNumber = Integer.parseInt(bufferedReader.readLine());
@@ -163,7 +153,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 8:
+					case 16:
 						System.out.println("Please enter the customer's ID:");
 						try {
 							int customerID = Integer.parseInt(bufferedReader.readLine());
@@ -183,7 +173,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 9:
+					case 14:
 						try {
 							System.out.println("Please enter the hotel's ID:");
 							int hotelID = Integer.parseInt(bufferedReader.readLine());
@@ -200,7 +190,7 @@ public class TerminalTransactions {
 						}
 						break;
 
-					case 10:
+					case 12:
 						try {
 							System.out.println("Please enter a new worker's workerId, departmentId, name, birthdate, gender, department, contract start time");
 							int workerId = Integer.parseInt(bufferedReader.readLine());
@@ -218,7 +208,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 11:
+					case 7:
 						try {
 							System.out.println("Please enter the room's information.(including hotelID, roomNumber, price, state, and kind)");
 							int hotelID = Integer.parseInt(bufferedReader.readLine());
@@ -234,7 +224,7 @@ public class TerminalTransactions {
 						}
 						break;
 
-					case 12:
+					case 13:
 						try {
 							System.out.println("Please enter the worker's wID");
 							int workerID = Integer.parseInt(bufferedReader.readLine());
@@ -245,7 +235,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 13:
+					case 17:
 						try {
 							System.out.println("Please enter the customer's driving license number:");
 							String drivingLicense = bufferedReader.readLine();
@@ -261,7 +251,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 14:
+					case 18:
 						try {
 							System.out.println("Please enter the membership ID:");
 							int membershipID = Integer.parseInt(bufferedReader.readLine());
@@ -284,7 +274,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 15:
+					case 3:
 						try {
 							System.out.println("Please enter the hotel's ID:");
 							int hotelId = Integer.parseInt(bufferedReader.readLine());
@@ -311,7 +301,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 16:
+					case 19:
 						try {
 							System.out.println("Please enter the hotel's ID:");
 							int hotelID = Integer.parseInt(bufferedReader.readLine());
@@ -320,7 +310,7 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 17:
+					case 6:
 						try {
 							System.out.println("Please enter the hotel ID to find the number of available rooms");
 							int hotelID = Integer.parseInt(bufferedReader.readLine());
@@ -335,19 +325,18 @@ public class TerminalTransactions {
 							e.printStackTrace();
 						}
 						break;
-					case 18:
+					case 5:
 						System.out.println("The room numbers of the most expensive room in each hotel are: \n");
 						List<Room> rooms = delegate.expensiveRoom();
 						for (Room room : rooms) {
 							System.out.println("room number: " + room.getRoom_number() + " in the hotel_id: " + room.getHotel_id() + "\n");
 						}
 						break;
-					case 19:
+					case 4:
 						List<HotelBelongs> hotels = delegate.showFullHotels();
 						if(!hotels.isEmpty()) {
 							for(HotelBelongs hotel : hotels) {
-								System.out.println(hotel.getHotelName());
-								System.out.println(hotel.getAddress());
+								System.out.println(hotel.getId() + " | " + hotel.getHotelName() + " | " + hotel.getRevenue() + " | " + hotel.getBuiltTime() + " | " + hotel.getCompanyName() + " | " + hotel.getAddress() + " | " + hotel.getRating());
 							}
 						} else {
 							System.out.println("All hotels have available rooms!");

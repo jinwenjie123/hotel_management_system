@@ -318,11 +318,13 @@ public class DatabaseConnectionHandler {
 			ps.setString(5,kind);
 			ps.setInt(6,hotelID);
 			ps.setInt(7,roomNumber);
-
+			ps.executeUpdate();
 			int rowCount = ps.executeUpdate();
 			if (rowCount >= 1) {
 				return true;
 			}
+			connection.commit();
+			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
