@@ -300,6 +300,8 @@ public class DatabaseConnectionHandler {
 
 			int rowCount = stmt.executeUpdate(query);
 			if (rowCount >= 1) {
+				connection.commit();
+				stmt.close();
 				return true;
 			}
 		} catch (SQLException e) {
@@ -318,13 +320,13 @@ public class DatabaseConnectionHandler {
 			ps.setString(5,kind);
 			ps.setInt(6,hotelID);
 			ps.setInt(7,roomNumber);
-			ps.executeUpdate();
 			int rowCount = ps.executeUpdate();
 			if (rowCount >= 1) {
+				connection.commit();
+				ps.close();
 				return true;
 			}
-			connection.commit();
-			ps.close();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -383,6 +385,8 @@ public class DatabaseConnectionHandler {
 			String query = "DELETE FROM WORKER_WORKS WHERE WID = " + "'" + workerID + "'";
 			int rowCount = stmt.executeUpdate(query);
 			if (rowCount >= 1) {
+				connection.commit();
+				stmt.close();
 				return true;
 			}
 		} catch (SQLException e) {
