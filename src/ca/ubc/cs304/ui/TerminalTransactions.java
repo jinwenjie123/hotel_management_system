@@ -67,7 +67,7 @@ public class TerminalTransactions {
 		bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		int choice = INVALID_INPUT;
 
-		while (choice != 17) {
+		while (choice != 20) {
 			System.out.println();
 			System.out.println("|-------------------------------------------------------------- MENU ----------------------------------------------------------------------------|");
 			System.out.println("| 1. Show all company                         | 2. Show hotels under a specific company            | 3. Add a hotel                              |");
@@ -122,7 +122,11 @@ public class TerminalTransactions {
 						System.out.println("Please enter the customer's ID:");
 						try {
 							int customerID = Integer.parseInt(bufferedReader.readLine());
-							System.out.println(delegate.checkMembership(customerID));
+							if(delegate.checkMembership(customerID) == true) {
+								System.out.println("The customer is a membership!");
+							} else {
+								System.out.println("The customer is not a membership!");
+							}
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -160,11 +164,9 @@ public class TerminalTransactions {
 							List<BillPays> bills = delegate.checkBill(customerID);
 							if(!bills.isEmpty()) {
 								for(BillPays bill : bills) {
-									System.out.println(bill.getbID());
-									System.out.println(bill.getcID());
-									System.out.println(bill.getPrice());
-									System.out.println(bill.getPaymentDate());
-									System.out.println(bill.getPaymentMethod());
+									System.out.println("Bill's ID: " + bill.getbID() + " | " + "Customer ID: " + bill.getcID() + " | " +
+											"Bill's price: " + bill.getPrice() + " | " + "Bill's payment date: " + bill.getPaymentDate() + " | " +
+											"Bill's payment method: " + bill.getPaymentMethod());
 								}
 							} else {
 								System.out.println("The customer doesn't have any bills!");
