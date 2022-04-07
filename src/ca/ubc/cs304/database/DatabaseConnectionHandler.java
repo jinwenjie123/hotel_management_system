@@ -473,7 +473,7 @@ public class DatabaseConnectionHandler {
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO MEMBERSHIP_APPLIES VALUES (?, ?, ?, ?, ?)");
 			ps.setInt(1, membershipID);
 			ps.setInt(2, customerID);
-			ps.setString(3, joinDate);
+			ps.setDate(3, java.sql.Date.valueOf(joinDate));
 			ps.setFloat(4, discount);
 			ps.setLong(5, credit);
 

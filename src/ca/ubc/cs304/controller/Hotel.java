@@ -76,10 +76,13 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
             return workers;
         }
         for (WorkerWorks worker : workers) {
-            System.out.println(worker.getName());
-            System.out.println(worker.getBirthDate());
-            System.out.println(worker.getSex());
-            System.out.println(worker.getContractStartTime());
+            System.out.println("Department id: " + worker.getdID());
+            System.out.println("Worker's id: " + worker.getwID());
+            System.out.println("Worker's name: " + worker.getName());
+            System.out.println("Worker's birthday: " + worker.getBirthDate());
+            System.out.println("Worker's gender: " + worker.getSex());
+            System.out.println("Worker's contract start time: " + worker.getContractStartTime());
+            System.out.println();
         }
         return workers;
     }
@@ -92,7 +95,7 @@ public class Hotel implements LoginWindowDelegate, TerminalTransactionsDelegate 
             System.out.printf("Error! Wrong roomnumber!");
         }
         for (Room room : rooms) {
-            System.out.println(room.getRoom_number() + " "+ room.getPrice() + " " + room.getKind() + " " + room.getState() + " " + room.getHotel_id());
+            System.out.println("Room number: " + room.getRoom_number() + " | "+ "Room's price: " + room.getPrice() + " | " + "Room's kind: " + room.getKind() + " | " + "Room's state: " + room.getState() + " | " + "Room belongs to hotel #: " + room.getHotel_id());
         }
     }
 

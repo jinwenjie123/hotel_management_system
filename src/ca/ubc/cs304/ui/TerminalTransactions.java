@@ -338,7 +338,7 @@ public class TerminalTransactions {
 						List<HotelBelongs> hotels = delegate.showFullHotels();
 						if(!hotels.isEmpty()) {
 							for(HotelBelongs hotel : hotels) {
-								System.out.println(hotel.getId() + " | " + hotel.getHotelName() + " | " + hotel.getRevenue() + " | " + hotel.getBuiltTime() + " | " + hotel.getCompanyName() + " | " + hotel.getAddress() + " | " + hotel.getRating());
+								System.out.println("Hotel id: " + hotel.getId() + " | " + "Hotel's name: " + hotel.getHotelName() + " | " + "Hotel's revenue: " + hotel.getRevenue() + " | \n" + "Hotel's built time: " + hotel.getBuiltTime() + " | " + "Hotel's company name: " + hotel.getCompanyName() + " | " + "Hotel's address: " + hotel.getAddress() + " | " + "Hotel's rating: " + hotel.getRating());
 							}
 						} else {
 							System.out.println("All hotels have available rooms!");
